@@ -1,0 +1,73 @@
+{
+	"pages": [{
+		"path": "pages/home/index",
+		"style" : {
+			// #ifdef APP-PLUS
+			"navigationStyle": "custom",
+			"app-plus":{
+				"titleNView": false    //去掉当前页的顶部导航栏
+			},
+			"navigationBarTextStyle":"white",
+			// #endif
+			// #ifdef MP
+			"navigationBarTitleText": "闪贷分期",
+			"navigationBarBackgroundColor": "#FFFFFF",
+			// #endif
+			"h5":{
+				"titleNView": false
+			}
+		}
+	},{
+		"path": "pages/borrowing/index",
+		"style": {
+			"app-plus":{
+				"titleNView":false
+			},
+			"navigationBarBackgroundColor": "#FFFFFF",
+			"navigationBarTitleText": "借款"
+		}
+	},{
+		"path": "pages/my/index",
+		"style": {
+			"app-plus":{
+				"titleNView":false
+			},
+			"navigationBarBackgroundColor": "#FFFFFF",
+			"navigationBarTitleText": "我的"
+		}
+	}],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "闪贷分期",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	},
+	"tabBar": {
+		"custom": true,
+		"selectedColor": "#f23030",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"iconPath": "/static/tabBar/tab_01.png",
+				"selectedIconPath": "/static/tabBar/tab_02.png",
+				"pagePath": "pages/home/index",
+				"text": "首页"
+			},
+			{
+				"iconPath": "/static/tabBar/tab_03.png",
+				"selectedIconPath": "/static/tabBar/tab_04.png",
+				"pagePath": "pages/borrowing/index",
+				"text": "借款"
+			},
+			{
+				"iconPath": "/static/tabBar/tab_05.png",
+				"selectedIconPath": "/static/tabBar/tab_06.png",
+				"pagePath": "pages/my/index",
+				"text": "我的"
+			}
+		]
+	}
+}
