@@ -5,65 +5,40 @@
 				<swiper-item v-for="(item, index) in swiperList" :key="index">
 					<view class="item">
 						<view class="title">
-							<view class="logo">
-								<image :src="item.logo"></image>
-							</view>
+							<view class="logo"><image :src="item.logo"></image></view>
 							<text class="text">{{ item.title }}</text>
 						</view>
 						<view class="apply-row">
 							<view class="l">
 								<text class="msg1">{{ item.msg1 }}</text>
-								<view class="sum">{{item.sum}}</view>
+								<view class="sum">{{ item.sum }}</view>
 							</view>
 							<view class="r"><button class="apply-bnt" type="warn">立即申请</button></view>
 						</view>
 						<view>
 							<uni-icons class="icon" size="16" color="#fff" type="checkbox"></uni-icons>
-							<text>{{item.msg2}}</text>
+							<text>{{ item.msg2 }}</text>
 						</view>
 					</view>
 				</swiper-item>
 			</swiper>
 		</view>
-		<view>
-			<uni-notice-bar backgroundColor="#f5dfdc" speed="40" scrollable="true" single="true" showIcon="true" :text="noticeText"></uni-notice-bar>
-		</view>
+		<view><uni-notice-bar backgroundColor="#f5dfdc" :speed="40" scrollable="true" single="true" showIcon="true" :text="noticeText"></uni-notice-bar></view>
 		<view class="recommend">
 			<view class="title">热门推荐</view>
-			<view class="item" v-for="(item, index) in recommendList" :key="index">
-				<view class="top-content">
-					<view class="left">
-						<view class="pictrue">
-							<image :src="item.logo" mode=""></image>
-						</view>
-						<view class="to-text">
-							<view class="t1">{{item.t1}}</view>
-							<view class="t2 color-85">{{item.t2}}</view>
-						</view>
-					</view>
-					<view class="right">
-						<button type="primary" size="mini">立即领钱</button>
-					</view>
-				</view>
-				<view class="align-content fix">
-					<view class="fix-3 color-red">{{item.scope}}</view>
-					<view class="fix-3 uni-center">{{item.sum}}</view>
-					<view class="fix-3 f-r color-red">{{item.deadline}}</view>
-				</view>
-				<view class="fix">
-					<view class="fix-3 color-85">额度范围(元)</view>
-					<view class="fix-3 uni-center color-85">成功下款</view>
-					<view class="fix-3 f-r color-85">期限</view>
-				</view>
-			</view>
+			<list-item :list="recommendList"></list-item>
 		</view>
 	</view>
 </template>
 
 <script>
-import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
+import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue';
+import listItem from '@/components/list-item/list-item.vue';
 export default {
-	components: {uniNoticeBar},
+	components: {
+		uniNoticeBar,
+		listItem
+	},
 	data() {
 		return {
 			swiperList: [
@@ -101,7 +76,8 @@ export default {
 					scope: '6000-8000',
 					sum: '2424342人',
 					deadline: '1-9个月'
-				}, {
+				},
+				{
 					id: 1,
 					t1: '牛牛万卡-热推',
 					t2: '资料简单 下款急速',
@@ -109,7 +85,8 @@ export default {
 					scope: '4000-6000',
 					sum: '2424342人',
 					deadline: '1-9个月'
-				}, {
+				},
+				{
 					id: 2,
 					t1: '凤凰应急-防水',
 					t2: '资料简单 下款急速',
@@ -117,7 +94,7 @@ export default {
 					scope: '3000-6000',
 					sum: '2424342人',
 					deadline: '1-9个月'
-				},
+				}
 			],
 			noticeText: '经统计，同事申请3家以上产品，下款率高达98.6%以上',
 			indicatorDots: true,
@@ -131,5 +108,4 @@ export default {
 
 <style scoped lang="scss">
 @import 'home.scss';
-
 </style>

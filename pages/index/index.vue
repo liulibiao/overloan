@@ -1,22 +1,20 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
-		<vus-layer></vus-layer>
+		<myTabbar />
 	</view>
 </template>
 
 <script>
+	import myTabbar from '@/components/stzhang-tab/stzhang-tab.vue'
 	export default {
+		components:{myTabbar},
 		data() {
 			return {
 				title: 'Hello'
 			}
 		},
 		onLoad() {
-			this.vusui.alert('常规信息框')
+
 		},
 		methods: {
 
@@ -26,28 +24,16 @@
 
 <style>
 	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+		text-align: center;
+		height: 400upx;
 	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
+    .logo{
+        height: 200upx;
+        width: 200upx;
+        margin-top: 200upx;
+    }
 	.title {
-		font-size: 36rpx;
+		font-size: 36upx;
 		color: #8f8f94;
 	}
 </style>
