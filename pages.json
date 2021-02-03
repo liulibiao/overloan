@@ -2,26 +2,27 @@
 	"pages": [{
 		"path": "pages/home/index",
 		"style" : {
-			// #ifdef APP-PLUS
-			"navigationStyle": "custom",
+			// "navigationBarTitleText": "借款"
+			// // #ifdef APP-PLUS
+			// "navigationStyle": "custom",
 			"app-plus":{
-				"titleNView": false    //去掉当前页的顶部导航栏
+				"titleNView": true    //去掉当前页的顶部导航栏
 			},
-			"navigationBarTextStyle":"white",
-			// #endif
-			// #ifdef MP
+			// "navigationBarTextStyle":"white",
+			// // #endif
+			// // #ifdef MP
 			"navigationBarTitleText": "闪贷分期",
-			"navigationBarBackgroundColor": "#FFFFFF",
-			// #endif
-			"h5":{
-				"titleNView": false
-			}
+			"navigationBarBackgroundColor": "#FFFFFF"
+			// // #endif
+			// "h5":{
+			// 	"titleNView": true
+			// }
 		}
 	},{
 		"path": "pages/borrowing/index",
 		"style": {
 			"app-plus":{
-				"titleNView":false
+				"titleNView":true
 			},
 			"navigationBarBackgroundColor": "#FFFFFF",
 			"navigationBarTitleText": "借款"
@@ -30,16 +31,22 @@
 		"path": "pages/my/index",
 		"style": {
 			"app-plus":{
-				"titleNView":false
+				"titleNView":true
 			},
 			"navigationBarBackgroundColor": "#FFFFFF",
 			"navigationBarTitleText": "我的"
 		}
+	}, {
+		"path": "components/view/view",
+		"style": {
+			"navigationBarTitleText": "view"
+		}
 	}],
 	"globalStyle": {
+		"enablePullDownRefresh": true,
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "闪贷分期",
-		"navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarBackgroundColor": "#f1f1f1",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
 			"background": "#efeff4"

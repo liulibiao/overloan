@@ -1,7 +1,7 @@
 <template>
 	<view class="main">
 		<view class="banner">
-			<swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="300">
+			<swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="300">
 				<swiper-item v-for="(item, index) in swiperList" :key="index">
 					<view class="item">
 						<view class="title">
@@ -48,7 +48,8 @@ export default {
 					logo: '/static/test/alipay.jpeg',
 					msg1: '今日最高额度(元)',
 					sum: 6000,
-					msg2: '资料简单 下款急速'
+					msg2: '资料简单 下款急速',
+					url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
 				},
 				{
 					id: 1,
@@ -56,7 +57,8 @@ export default {
 					logo: '/static/test/ljs.jpeg',
 					msg1: '今日最高额度(元)',
 					sum: 8000,
-					msg2: '低息秒下款'
+					msg2: '低息秒下款',
+					url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
 				},
 				{
 					id: 2,
@@ -64,7 +66,8 @@ export default {
 					logo: '/static/test/paipai.jpg',
 					msg1: '今日最高额度(元)',
 					sum: 10000,
-					msg2: '审核简单 下款急速'
+					msg2: '审核简单 下款急速',
+					url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
 				}
 			],
 			recommendList: [
@@ -75,7 +78,8 @@ export default {
 					logo: '/static/test/alipay.jpeg',
 					scope: '6000-8000',
 					sum: '2424342人',
-					deadline: '1-9个月'
+					deadline: '1-9个月',
+					url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
 				},
 				{
 					id: 1,
@@ -84,7 +88,8 @@ export default {
 					logo: '/static/test/ljs.jpeg',
 					scope: '4000-6000',
 					sum: '2424342人',
-					deadline: '1-9个月'
+					deadline: '1-9个月',
+					url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
 				},
 				{
 					id: 2,
@@ -93,7 +98,8 @@ export default {
 					logo: '/static/test/paipai.jpg',
 					scope: '3000-6000',
 					sum: '2424342人',
-					deadline: '1-9个月'
+					deadline: '1-9个月',
+					url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
 				}
 			],
 			noticeText: '经统计，同事申请3家以上产品，下款率高达98.6%以上',

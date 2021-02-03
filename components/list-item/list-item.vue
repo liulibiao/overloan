@@ -2,7 +2,7 @@
 	<view>
 		<view class="list-item" v-for="(item, index) in list" :key="index">
 			<view class="top-content">
-				<view class="left">
+				<view class="left" @click="onJumpH5(item)">
 					<view class="pictrue"><image :src="item.logo" mode=""></image></view>
 					<view class="to-text">
 						<view class="t1">{{ item.t1 }}</view>
@@ -38,6 +38,14 @@ export default {
 	},
 	data() {
 		return {};
+	},
+	methods: {
+		onJumpH5(item) {
+			const { url, t1 } = item || {};
+			uni.navigateTo({
+				url: `/components/view/view?title=${t1}&url=${url}`
+			})
+		}
 	}
 };
 </script>

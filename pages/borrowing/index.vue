@@ -1,8 +1,10 @@
 <template>
 	<view>
 		<uni-notice-bar backgroundColor="#f5dfdc" :speed="40" scrollable="true" single="true" showIcon="true" :text="noticeText"></uni-notice-bar>
-		<uni-tabs :tabData="tabs" :defaultIndex="defaultIndex" @tabClick='tabClick'>
-		</uni-tabs>
+		<view style="background-color: #FFFFFF">
+			<uni-tabs :tabData="tabs" :defaultIndex="defaultIndex" @tabClick='tabClick'>
+			</uni-tabs>
+		</view>
 		<view class="list-item">
 			<list-item :list="data"></list-item>
 		</view>
@@ -32,7 +34,8 @@
 						logo: '/static/test/alipay.jpeg',
 						scope: '6000-8000',
 						sum: '2424342人',
-						deadline: '1-9个月'
+						deadline: '1-9个月',
+						url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
 					},
 					{
 						id: 1,
@@ -41,7 +44,8 @@
 						logo: '/static/test/ljs.jpeg',
 						scope: '4000-6000',
 						sum: '2424342人',
-						deadline: '1-9个月'
+						deadline: '1-9个月',
+						url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
 					},
 					{
 						id: 2,
@@ -50,7 +54,8 @@
 						logo: '/static/test/paipai.jpg',
 						scope: '3000-6000',
 						sum: '2424342人',
-						deadline: '1-9个月'
+						deadline: '1-9个月',
+						url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
 					}
 				],
 			}

@@ -1,5 +1,5 @@
 <template>
-	<view>我的</view>
+	<view>开发中。。。</view>
 </template>
 
 <script>
