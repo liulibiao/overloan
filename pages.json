@@ -1,25 +1,15 @@
 {
 	"pages": [{
-		"path": "pages/home/index",
+		"path": "pages/home/home",
 		"style" : {
-			// "navigationBarTitleText": "借款"
-			// // #ifdef APP-PLUS
-			// "navigationStyle": "custom",
 			"app-plus":{
-				"titleNView": true    //去掉当前页的顶部导航栏
+				"titleNView": true
 			},
-			// "navigationBarTextStyle":"white",
-			// // #endif
-			// // #ifdef MP
-			"navigationBarTitleText": "闪贷分期",
-			"navigationBarBackgroundColor": "#FFFFFF"
-			// // #endif
-			// "h5":{
-			// 	"titleNView": true
-			// }
+			"navigationBarBackgroundColor": "#FFFFFF",
+			"navigationBarTitleText": "闪贷分期"
 		}
 	},{
-		"path": "pages/borrowing/index",
+		"path": "pages/borrowing/borrowing",
 		"style": {
 			"app-plus":{
 				"titleNView":true
@@ -28,7 +18,7 @@
 			"navigationBarTitleText": "借款"
 		}
 	},{
-		"path": "pages/my/index",
+		"path": "pages/my/my",
 		"style": {
 			"app-plus":{
 				"titleNView":true
@@ -39,7 +29,9 @@
 	}, {
 		"path": "components/view/view",
 		"style": {
-			"navigationBarTitleText": "view"
+			"navigationBarTitleText": "借款",
+			"navigationBarBackgroundColor": "#F64640",
+			"navigationBarTextStyle": "white"
 		}
 	}],
 	"globalStyle": {
@@ -54,25 +46,25 @@
 	},
 	"tabBar": {
 		"custom": true,
-		"selectedColor": "#f23030",
-		"backgroundColor": "#ffffff",
+		"selectedColor": "#F23030",
+		"backgroundColor": "#FFFFFF",
 		"list": [
 			{
 				"iconPath": "/static/tabBar/tab_01.png",
 				"selectedIconPath": "/static/tabBar/tab_02.png",
-				"pagePath": "pages/home/index",
+				"pagePath": "pages/home/home",
 				"text": "首页"
 			},
 			{
 				"iconPath": "/static/tabBar/tab_03.png",
 				"selectedIconPath": "/static/tabBar/tab_04.png",
-				"pagePath": "pages/borrowing/index",
+				"pagePath": "pages/borrowing/borrowing",
 				"text": "借款"
 			},
 			{
 				"iconPath": "/static/tabBar/tab_05.png",
 				"selectedIconPath": "/static/tabBar/tab_06.png",
-				"pagePath": "pages/my/index",
+				"pagePath": "pages/my/my",
 				"text": "我的"
 			}
 		]

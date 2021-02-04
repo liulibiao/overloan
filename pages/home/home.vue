@@ -3,7 +3,7 @@
 		<view class="banner">
 			<swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="300">
 				<swiper-item v-for="(item, index) in swiperList" :key="index">
-					<view class="item">
+					<view @click="onJumpH5(item)" class="item">
 						<view class="title">
 							<view class="logo"><image :src="item.logo"></image></view>
 							<text class="text">{{ item.title }}</text>
@@ -108,6 +108,14 @@ export default {
 			interval: 2000,
 			duration: 500
 		};
+	},
+	methods: {
+		onJumpH5(item) {
+			const { url, title } = item || {};
+			uni.navigateTo({
+				url: `/components/view/view?title=${title}&url=${url}`
+			})
+		}
 	}
 };
 </script>

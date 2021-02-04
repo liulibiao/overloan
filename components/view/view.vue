@@ -1,28 +1,29 @@
 <template>
-	<view>
-		<page-head :title="title"></page-head>
-		<view class="uni-padding-wrap uni-common-mt">
-			<web-view :src="url"></web-view>
-		</view>
-	</view>
+	<web-view :webview-styles="webviewStyles" :src="url"></web-view>
 </template>
 <script>
-	export default {
-		name: 'view-page',
-		data() {
-			return {
-				url: ''
-			}
-		},
-		onLoad: function(optioin) {
-			const { title, url } = optioin;
-			this.url = url;
-			uni.setNavigationBarTitle({
-			    title
-			});
-		}
+import navBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
+export default {
+	components: { navBar },
+	name: 'view-page',
+	data() {
+		return {
+			webviewStyles: {
+				progress: {
+					color: '#f64640'
+				}
+			},
+			url: ''
+		};
+	},
+	onLoad: function(optioin) {
+		const { title, url } = optioin;
+		this.url = url;
+		uni.setNavigationBarTitle({
+			title
+		});
 	}
+};
 </script>
 
-<style>
-</style>
+<style></style>

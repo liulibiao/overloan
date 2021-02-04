@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<view class="list-item" v-for="(item, index) in list" :key="index">
+		<view @click="onJumpH5(item)" class="list-item" v-for="(item, index) in list" :key="index">
 			<view class="top-content">
-				<view class="left" @click="onJumpH5(item)">
+				<view class="left">
 					<view class="pictrue"><image :src="item.logo" mode=""></image></view>
 					<view class="to-text">
 						<view class="t1">{{ item.t1 }}</view>
