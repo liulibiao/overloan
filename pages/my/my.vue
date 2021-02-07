@@ -1,183 +1,121 @@
 <template>
 	<view class="center">
 		<view class="logo" @click="goLogin" :hover-class="!login ? 'logo-hover' : ''">
-			<image class="logo-img" :src="login ? uerInfo.avatarUrl :avatarUrl"></image>
-			<view class="logo-title">
-				<text class="uer-name">Hi，{{login ? uerInfo.name : '您未登录'}}</text>
-				<text class="go-login navigat-arrow" v-if="!login">&#xe65e;</text>
+			<image class="logo-img" :src="login ? uerInfo.avatarUrl : avatarUrl"></image>
+			<view>
+				<text class="uer-name">{{ login ? uerInfo.name : '点击登录' }}</text>
 			</view>
 		</view>
 		<view class="center-list">
-			<view class="center-list-item border-bottom">
-				<text class="list-icon">&#xe60f;</text>
-				<text class="list-text">帐号管理</text>
-				<text class="navigat-arrow">&#xe65e;</text>
-			</view>
-			<view class="center-list-item">
-				<text class="list-icon">&#xe639;</text>
-				<text class="list-text">新消息通知</text>
-				<text class="navigat-arrow">&#xe65e;</text>
-			</view>
-		</view>
-		<view class="center-list">
-			<view class="center-list-item border-bottom">
-				<text class="list-icon">&#xe60b;</text>
-				<text class="list-text">帮助与反馈</text>
-				<text class="navigat-arrow">&#xe65e;</text>
-			</view>
-			<view class="center-list-item">
-				<text class="list-icon">&#xe65f;</text>
-				<text class="list-text">服务条款及隐私</text>
-				<text class="navigat-arrow">&#xe65e;</text>
-			</view>
-		</view>
-		<view class="center-list">
-			<view class="center-list-item">
-				<text class="list-icon">&#xe614;</text>
-				<text class="list-text">关于应用</text>
-				<text class="navigat-arrow">&#xe65e;</text>
+			<view class="center-list-item" v-for="(item, index) in lineItem" :class="{ 'border-bottom': lineItem.length > index + 1 }" :key="item.icon">
+				<uni-icons color="#f55652" style="margin-right: 15upx" class="list-icon" :type="item.icon" size="15"></uni-icons>
+				<text class="list-text">{{ item.name }}</text>
+				<uni-icons color="#555" class="list-icon" type="arrowright" size="15"></uni-icons>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				login: false,
-				avatarUrl: "../../static/user.png",
-				uerInfo: {}
-			}
-		},
-		methods: {
-			goLogin() {
-				if (!this.login) {
-					console.log("点击前往登录")
+import uniIcons from '@/components/uni-icons/uni-icons.vue';
+export default {
+	components: { uniIcons },
+	data() {
+		return {
+			login: false,
+			avatarUrl: '../../static/user.png',
+			uerInfo: {},
+			lineItem: [
+				{
+					icon: 'hand-thumbsup',
+					name: '意见反馈'
+				},
+				{
+					icon: 'help',
+					name: '关于我们'
+				},
+				{
+					icon: 'compose',
+					name: '注销账号'
+				},
+				{
+					icon: 'info',
+					name: '当前版本'
 				}
+			]
+		};
+	},
+	methods: {
+		goLogin() {
+			if (!this.login) {
+				console.log('点击前往登录');
 			}
 		}
 	}
+};
 </script>
 
-<style>
-	@font-face {
-		font-family: texticons;
-		font-weight: normal;
-		font-style: normal;
-		src: url('https://at.alicdn.com/t/font_984210_5cs13ndgqsn.ttf') format('truetype');
-	}
+<style scoped lang="scss">
+.logo {
+	height: 300rpx;
+	padding-top: 40rpx;
+	text-align: center;
+	background-color: #F64640;
+}
 
-	page,
-	view {
-		display: flex;
-	}
+.logo-img {
+	width: 150upx;
+	height: 150upx;
+	border-radius: 150upx;
+}
 
-	page {
-		background-color: #f8f8f8;
-	}
+.uer-name {
+	color: #FFFFFF;
+	font-size: 38upx;
+}
 
-	.center {
-		flex-direction: column;
-	}
+.go-login.navigat-arrow {
+	font-size: 38upx;
+	color: #ffffff;
+}
 
-	.logo {
-		width: 750upx;
-		height: 240upx;
-		padding: 20upx;
-		box-sizing: border-box;
-		background-color: #4cd964;
-		flex-direction: row;
-		align-items: center;
-	}
+.login-title {
+	height: 150upx;
+	align-items: self-start;
+	justify-content: center;
+	flex-direction: column;
+	margin-left: 20upx;
+}
 
-	.logo-hover {
-		opacity: 0.8;
-	}
+.center-list {
+	background-color: #ffffff;
+	margin: 10px 15px;
+	border-radius: 15px;
+}
 
-	.logo-img {
-		width: 150upx;
-		height: 150upx;
-		border-radius: 150upx;
-	}
+.center-list-item {
+	display: flex;
+	margin: 20rpx;
+}
 
-	.logo-title {
-		height: 150upx;
-		flex: 1;
-		align-items: center;
-		justify-content: space-between;
-		flex-direction: row;
-		margin-left: 20upx;
-	}
+.border-bottom {
+	border-bottom-width: 1upx;
+	border-color: #c8c7cc;
+	border-bottom-style: solid;
+}
 
-	.uer-name {
-		height: 60upx;
-		line-height: 60upx;
-		font-size: 38upx;
-		color: #FFFFFF;
-	}
+.list-icon {
+	height: 120upx;
+	line-height: 120upx;
+	text-align: center;
+}
 
-	.go-login.navigat-arrow {
-		font-size: 38upx;
-		color: #FFFFFF;
-	}
-
-	.login-title {
-		height: 150upx;
-		align-items: self-start;
-		justify-content: center;
-		flex-direction: column;
-		margin-left: 20upx;
-	}
-
-	.center-list {
-		background-color: #FFFFFF;
-		margin-top: 20upx;
-		width: 750upx;
-		flex-direction: column;
-	}
-
-	.center-list-item {
-		height: 90upx;
-		width: 750upx;
-		box-sizing: border-box;
-		flex-direction: row;
-		padding: 0upx 20upx;
-	}
-
-	.border-bottom {
-		border-bottom-width: 1upx;
-		border-color: #c8c7cc;
-		border-bottom-style: solid;
-	}
-
-	.list-icon {
-		width: 40upx;
-		height: 90upx;
-		line-height: 90upx;
-		font-size: 34upx;
-		color: #4cd964;
-		text-align: center;
-		font-family: texticons;
-		margin-right: 20upx;
-	}
-
-	.list-text {
-		height: 90upx;
-		line-height: 90upx;
-		font-size: 34upx;
-		color: #555;
-		flex: 1;
-		text-align: left;
-	}
-
-	.navigat-arrow {
-		height: 90upx;
-		width: 40upx;
-		line-height: 90upx;
-		font-size: 34upx;
-		color: #555;
-		text-align: right;
-		font-family: texticons;
-	}
+.list-text {
+	height: 120upx;
+	line-height: 120upx;
+	font-size: 34upx;
+	color: #000;
+	flex: 1;
+	text-align: left;
+}
 </style>
