@@ -1,8 +1,8 @@
 <template>
 	<view class="center">
-		<view class="logo" @click="goLogin" :hover-class="!login ? 'logo-hover' : ''">
+		<view class="logo" :hover-class="!login ? 'logo-hover' : ''">
 			<image class="logo-img" :src="login ? uerInfo.avatarUrl : avatarUrl"></image>
-			<view>
+			<view @click="onLogin">
 				<text class="uer-name">{{ login ? uerInfo.name : '点击登录' }}</text>
 			</view>
 		</view>
@@ -46,9 +46,11 @@ export default {
 		};
 	},
 	methods: {
-		goLogin() {
+		onLogin() {
 			if (!this.login) {
-				console.log('点击前往登录');
+				uni.navigateTo({
+					url: '/pages/login/login'
+				});
 			}
 		}
 	}
