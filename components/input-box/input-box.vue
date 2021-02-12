@@ -284,5 +284,8 @@
 				@include bgImgBase($bgImgUrl:$onEye);
 			}
 		}
+		.codeStyle {
+			color: #0A98D5;
+		}
 	}
 </style>
