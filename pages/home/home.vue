@@ -34,6 +34,7 @@
 <script>
 import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue';
 import listItem from '@/components/list-item/list-item.vue';
+import { goLogin } from '@/common/util.js';
 export default {
 	components: {
 		uniNoticeBar,
@@ -111,11 +112,18 @@ export default {
 	},
 	methods: {
 		onJumpH5(item) {
-			const { url, title } = item || {};
-			uni.navigateTo({
-				url: `/components/view/view?title=${title}&url=${url}`
-			})
+			goLogin().then(phone => {
+				if (phone) {
+					const { url, title } = item || {};
+					uni.navigateTo({
+						url: `/components/view/view?title=${title}&url=${url}`
+					})
+				}
+			});
 		}
+	},
+	mounted() {
+
 	}
 };
 </script>

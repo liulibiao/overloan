@@ -24,7 +24,7 @@
 			// 软件协议
 			onAgree() {
 				uni.navigateTo({
-					url: '/pages/my/agree'
+					url: '/pages/my/agree/index'
 				})
 			},
 			// QQ客服

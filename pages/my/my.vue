@@ -1,9 +1,9 @@
 <template>
 	<view class="center">
-		<view class="logo" :hover-class="!login ? 'logo-hover' : ''">
-			<image class="logo-img" :src="login ? uerInfo.avatarUrl : avatarUrl"></image>
+		<view class="logo" :hover-class="!phoneNumber ? 'logo-hover' : ''">
+			<image class="logo-img" :src="phoneNumber ? uerInfo.avatarUrl : avatarUrl"></image>
 			<view @click="onLogin">
-				<text class="uer-name">{{ login ? uerInfo.name : '点击登录' }}</text>
+				<text class="uer-name">{{ phoneNumber ? phoneNumber : '点击登录' }}</text>
 			</view>
 		</view>
 		<view class="center-list">
@@ -14,7 +14,7 @@
 			</view>
 		</view>
 		<feed-back ref="feed"></feed-back>
-		<logout ref="out"></logout>
+		<logout ref="out" @onLogut="onLogut"></logout>
 	</view>
 </template>
 
@@ -22,7 +22,8 @@
 import uniIcons from '@/components/uni-icons/uni-icons.vue';
 import feedBack from './feedBack.vue';
 import logout from './logout.vue';
-
+import login from '@/common/login.js';
+import { goLogin } from '@/common/util.js'
 export default {
 	components: { 
 		uniIcons,
@@ -32,8 +33,11 @@ export default {
 	data() {
 		return {
 			login: false,
+			phoneNumber: '',
 			avatarUrl: '../../static/user.png',
-			uerInfo: {},
+			uerInfo: {
+				avatarUrl: '../../static/user2.png'
+			},
 			lineItem: [
 				{
 					icon: 'hand-thumbsup',
@@ -58,26 +62,66 @@ export default {
 			]
 		};
 	},
+	onShow() {
+		this.onUserInit();
+	},
 	methods: {
+		// 用户信息初始化
+		onUserInit() {
+			const phoneNumber = uni.getStorageSync('phoneNumber');
+			if (phoneNumber) {
+				this.phoneNumber = phoneNumber;
+			} else {
+				this.phoneNumber = '';
+			}
+		},
+		// 注销登录
+		onLogut() {
+			this.onUserInit();
+		},
+		// 登录
 		onLogin() {
-			if (!this.login) {
+			if (!this.phoneNumber) {
+				/* #ifndef APP-PLUS-NVUE */
+				login({onUpdate: e => {
+					if (e) {
+						this.onUserInit();
+					}
+				}});
+				/* #endif */
+				
+				/* H5 兼容 pc 所需 */
+				/* #ifdef H5 */
 				uni.navigateTo({
-					url: '/pages/login/login'
+					url: '/pages/my/login'
+				});
+				/* #endif */
+			}
+		},
+		// 登录跳转
+		_goLogin(name) {
+			if (this.phoneNumber) {
+				this.$refs[name].$refs.popup.open();
+			} else {
+				goLogin(e => {
+					if (e) {
+						this.onUserInit();
+					}
 				});
 			}
 		},
 		onClickLine(type) {
 			switch(type) {
 				case 'feed':
-				this.$refs.feed.$refs.popup.open();
+					this._goLogin('feed');
 				break;
 				case 'we':
-				uni.navigateTo({
-					url: '/pages/my/we'
-				});
+					uni.navigateTo({
+						url: '/pages/my/we'
+					});
 				break;
 				case 'logout':
-				this.$refs.out.$refs.popup.open();
+					this._goLogin('out');
 				break;
 				case 'versions':
 				

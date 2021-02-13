@@ -9,6 +9,7 @@
 	import uniPopup from '@/components/uni-popup/uni-popup.vue';
 	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue';
 	export default {
+		props: ['onLogut'],
 		name: 'feedBack',
 		components: {
 			uniPopup,
@@ -19,6 +20,8 @@
 				done();
 			},
 			confirm(dome) {
+				uni.clearStorageSync();
+				this.$emit('onLogut');
 				dome();
 			}
 		}

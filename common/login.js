@@ -1,11 +1,10 @@
 export default function(event) {
-	return uni.preLogin({
+	const { onUpdate } = event || {};
+	uni.preLogin({
 		provider: 'univerify',
 		success(res) {
 			//预登录成功
 			// 显示一键登录选项
-			console.log(res);
-			console.log('999', 2222);
 			uni.login({
 				provider: 'univerify',
 				univerifyStyle: {
@@ -49,50 +48,61 @@ export default function(event) {
 						privacyItems: [
 							// 自定义协议条款，最大支持2个，需要同时设置url和title. 否则不生效
 							{
+								url: `http://localhost:8080/#/pages/my/agree/user`, // 点击跳转的协议详情页面
+								title: '《用户协议》' // 协议名称
+							},
+							{
 								url: 'https://', // 点击跳转的协议详情页面
-								title: '用户服务协议' // 协议名称
+								title: '《隐私政策》' // 协议名称
 							}
 						]
 					}
 				},
 				success(res) {
 					// 登录成功
-					this.openid = res.authResult.openid;
-					this.access_token = res.authResult.access_token;
+					const { access_token, openid } = res.authResult || {};
 					console.log('一键登录成功', res); // {openid:'deviceIDlength+deviceID+gyuid',access_token:'接口返回的 token'}
-					console.log(this.openid);
-					console.log('access_token', this.access_token);
+					uni.setStorageSync('token', access_token);
+					uni.setStorageSync('openid', openid);
 					// 客户端(调用云函数)  调用云函数来实现整个业务逻辑
 					// 在得到access_token后，通过callfunction调用云函数
 					uniCloud.callFunction({
 							name: 'login', // 你的云函数名称
 							data: {
-								access_token: this.access_token, // 客户端一键登录接口返回的access_token
-								openid: this.openid // 客户端一键登录接口返回的openid
+								access_token, // 客户端一键登录接口返回的access_token
+								openid // 客户端一键登录接口返回的openid
 							}
-						})
-						.then(res => {
-							console.log('获取成功');
-							console.log(res);
-							// 获取用户的手机号
-							this.phoneNumber = res.result.data.phoneNumber;
-							console.log(this.phoneNumber);
-							// res.result = {
-							//   code: '',
-							//   message: ''
-							// }
-							// 登录成功，可以关闭一键登陆授权界面了
-							uni.closeAuthView();
-						})
-						.catch(err => {
+						}).then(ret => {
+							console.log('获取电话',  ret.result);
+							const { code, data } = ret.result || {};
+							if (code === 0 && data.code === 0) {
+								uni.setStorageSync('phoneNumber', data.phoneNumber);
+								onUpdate && onUpdate(data.phoneNumber);
+								console.log('获取电话成功', data.phoneNumber);
+								// 登录成功，可以关闭一键登陆授权界面了
+								uni.closeAuthView();
+							} else {
+								uni.showToast({
+									title: '一键登录失败，请重试或使用其他登录方式'
+								})
+							}
+							return ret;
+						}).catch(err => {
 							// 处理错误
 							console.log('获取失败');
 							console.log(err);
 						});
 				},
 				fail(res) {
+					// 其他登录方式
+					if (res.code == '30002') {
+						uni.closeAuthView();
+						uni.navigateTo({
+							url: '/pages/my/login'
+						})
+						return;
+					}
 					// 登录失败
-					// console.log('失败',2222);
 					console.log(res.errCode);
 					console.log(res.errMsg);
 				}
@@ -102,7 +112,6 @@ export default function(event) {
 			// 预登录失败
 			// 不显示一键登录选项（或置灰）
 			// 根据错误信息判断失败原因，如有需要可将错误提交给统计服务器
-			console.log('失败', 2222);
 			console.log(res.errCode);
 			console.log(res.errMsg);
 		}
