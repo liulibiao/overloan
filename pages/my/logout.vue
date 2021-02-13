@@ -1,6 +1,6 @@
 <template>
 	<uni-popup ref="popup">
-	    <uni-popup-dialog mode="textarea" type="error" title="问题反馈" :duration="2000" :before-close="true" @close="close" @confirm="confirm">
+	    <uni-popup-dialog mode="base" type="error" title="温馨提示" content="确定要注销当前账号？" :duration="2000" :before-close="true" @close="close" @confirm="confirm">
 		</uni-popup-dialog>
 	</uni-popup>
 </template>
@@ -18,8 +18,7 @@
 			close(done) {
 				done();
 			},
-			confirm(dome, value) {
-				console.log(value);
+			confirm(dome) {
 				dome();
 			}
 		}

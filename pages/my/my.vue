@@ -14,16 +14,20 @@
 			</view>
 		</view>
 		<feed-back ref="feed"></feed-back>
+		<logout ref="out"></logout>
 	</view>
 </template>
 
 <script>
 import uniIcons from '@/components/uni-icons/uni-icons.vue';
 import feedBack from './feedBack.vue';
+import logout from './logout.vue';
+
 export default {
 	components: { 
 		uniIcons,
-		feedBack
+		feedBack,
+		logout
 		},
 	data() {
 		return {
@@ -73,7 +77,7 @@ export default {
 				});
 				break;
 				case 'logout':
-				
+				this.$refs.out.$refs.popup.open();
 				break;
 				case 'versions':
 				

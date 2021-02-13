@@ -49,7 +49,7 @@ export default {
 					msg1: '今日最高额度(元)',
 					sum: 6000,
 					msg2: '资料简单 下款急速',
-					url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
+					url: 'http://web.crowd-funding.com.cn/?appMarket=afgarggrrqe'
 				},
 				{
 					id: 1,
@@ -67,7 +67,7 @@ export default {
 					msg1: '今日最高额度(元)',
 					sum: 10000,
 					msg2: '审核简单 下款急速',
-					url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
+					url: 'http://web.crowd-funding.com.cn/?appMarket=afgarggrrqe'
 				}
 			],
 			recommendList: [
@@ -79,7 +79,7 @@ export default {
 					scope: '6000-8000',
 					sum: '2424342人',
 					deadline: '1-9个月',
-					url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
+					url: 'http://web.crowd-funding.com.cn/?appMarket=afgarggrrqe'
 				},
 				{
 					id: 1,
@@ -99,7 +99,7 @@ export default {
 					scope: '3000-6000',
 					sum: '2424342人',
 					deadline: '1-9个月',
-					url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
+					url: 'http://web.crowd-funding.com.cn/?appMarket=afgarggrrqe'
 				}
 			],
 			noticeText: '经统计，同事申请3家以上产品，下款率高达98.6%以上',
