@@ -1,0 +1,33 @@
+.we-logo {
+		text-align: center;
+		margin: 80rpx 0;
+		.img {
+			width: 150upx;
+			height: 150upx;
+			border-radius: 30upx;
+		}
+	}
+	.we-line {
+		display: flex;
+		margin: 30rpx;
+		padding: 0 30rpx;
+		background-color: #FFFFFF;
+		.text {
+			height: 120upx;
+			line-height: 120upx;
+			font-size: 34upx;
+			color: #000;
+			flex: 1;
+			text-align: left;
+			font-weight: 600;
+		}
+		.qq {
+			color: #b1aaaa;
+		}
+		.icon {
+			height: 120upx;
+			line-height: 120upx;
+			text-align: center;
+		}
+	}
+	
