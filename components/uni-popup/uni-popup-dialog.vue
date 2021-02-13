@@ -5,7 +5,8 @@
 		</view>
 		<view class="uni-dialog-content">
 			<text class="uni-dialog-content-text" v-if="mode === 'base'">{{content}}</text>
-			<input v-else class="uni-dialog-input" v-model="val" type="text" :placeholder="placeholder" :focus="focus" >
+			<textarea v-else-if="mode === 'textarea'" maxlength="255" v-model="val" :placeholder="placeholder" :focus="focus" />
+			<input v-else class="uni-dialog-input" type="text" v-model="val" :placeholder="placeholder" :focus="focus" >
 		</view>
 		<view class="uni-dialog-button-group">
 			<view class="uni-dialog-button" @click="close">
@@ -126,10 +127,11 @@
 			 * 点击确认按钮
 			 */
 			onOk() {
+				const isInput = ['input', 'textarea'].includes(this.mode);
 				this.$emit('confirm', () => {
 					this.popup.close()
-					if (this.mode === 'input') this.val = this.value
-				}, this.mode === 'input' ? this.val : '')
+					if (isInput) this.val = this.value
+				}, isInput ? this.val : '')
 			},
 			/**
 			 * 点击取消按钮

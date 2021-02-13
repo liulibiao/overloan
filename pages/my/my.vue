@@ -7,19 +7,24 @@
 			</view>
 		</view>
 		<view class="center-list">
-			<view class="center-list-item" v-for="(item, index) in lineItem" :class="{ 'border-bottom': lineItem.length > index + 1 }" :key="item.icon">
+			<view class="center-list-item" v-for="(item, index) in lineItem" :class="{ 'border-bottom': lineItem.length > index + 1 }" :key="item.icon" @click="onClickLine(item.type)">
 				<uni-icons color="#f55652" style="margin-right: 15upx" class="list-icon" :type="item.icon" size="15"></uni-icons>
 				<text class="list-text">{{ item.name }}</text>
 				<uni-icons color="#555" class="list-icon" type="arrowright" size="15"></uni-icons>
 			</view>
 		</view>
+		<feed-back ref="feed"></feed-back>
 	</view>
 </template>
 
 <script>
 import uniIcons from '@/components/uni-icons/uni-icons.vue';
+import feedBack from './feedBack.vue';
 export default {
-	components: { uniIcons },
+	components: { 
+		uniIcons,
+		feedBack
+		},
 	data() {
 		return {
 			login: false,
@@ -28,19 +33,23 @@ export default {
 			lineItem: [
 				{
 					icon: 'hand-thumbsup',
-					name: '意见反馈'
+					name: '意见反馈',
+					type: 'feed'
 				},
 				{
 					icon: 'help',
-					name: '关于我们'
+					name: '关于我们',
+					type: 'we'
 				},
 				{
 					icon: 'compose',
-					name: '注销账号'
+					name: '注销账号',
+					type: 'logout'
 				},
 				{
 					icon: 'info',
-					name: '当前版本'
+					name: '当前版本',
+					type: 'versions'
 				}
 			]
 		};
@@ -51,6 +60,24 @@ export default {
 				uni.navigateTo({
 					url: '/pages/login/login'
 				});
+			}
+		},
+		onClickLine(type) {
+			switch(type) {
+				case 'feed':
+				this.$refs.feed.$refs.popup.open();
+				break;
+				case 'we':
+				uni.navigateTo({
+					url: '/pages/my/we'
+				});
+				break;
+				case 'logout':
+				
+				break;
+				case 'versions':
+				
+				break;
 			}
 		}
 	}

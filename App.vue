@@ -32,11 +32,11 @@ export default {
  	    right: 0;
  	} */
 
-uni-page-body {
+/* uni-page-body {
 	background-color: #f5f5f5 !important;
 	min-height: 100% !important;
 	height: auto !important;
-}
+} */
 
 .uni-top-window uni-tabbar .uni-tabbar {
 	background-color: #fff !important;

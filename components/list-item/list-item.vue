@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import login from '@/common/login.js';
 export default {
 	name: 'list-item',
 	props: {
@@ -41,6 +42,8 @@ export default {
 	},
 	methods: {
 		onJumpH5(item) {
+			login();
+			return;
 			const { url, t1 } = item || {};
 			uni.navigateTo({
 				url: `/components/view/view?title=${t1}&url=${url}`
@@ -55,6 +58,7 @@ export default {
 	padding: 20rpx;
 	margin-bottom: 12rpx;
 	background-color: #ffffff;
+	border-radius: 10rpx;
 	.top-content {
 		overflow: hidden;
 		height: 80rpx;

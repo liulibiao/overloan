@@ -1,5 +1,7 @@
 <template>
-	<web-view :webview-styles="webviewStyles" :src="url"></web-view>
+	<view>
+		<web-view :webview-styles="webviewStyles" :src="url"></web-view>
+	</view>
 </template>
 <script>
 import navBar from '@/components/uni-nav-bar/uni-nav-bar.vue';

@@ -41,6 +41,15 @@
 			"enablePullDownRefresh": false
 		}
 		
+	}, {
+		"path": "pages/my/we",
+		"style": {
+			"navigationBarTitleText": "关于我们",
+			"enablePullDownRefresh": false,
+			"navigationBarBackgroundColor": "#F64640",
+			"navigationBarTextStyle": "white"
+		}
+		
 	}],
 	"globalStyle": {
 		"enablePullDownRefresh": true,

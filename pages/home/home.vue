@@ -10,7 +10,7 @@
 						</view>
 						<view class="apply-row">
 							<view class="l">
-								<text class="msg1">{{ item.msg1 }}</text>
+								<view class="msg1">{{ item.msg1 }}</view>
 								<view class="sum">{{ item.sum }}</view>
 							</view>
 							<view class="r"><button class="apply-bnt" type="warn">立即申请</button></view>

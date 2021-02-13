@@ -12,7 +12,7 @@
 			</view>
 			<!-- 非密码输入框类 -->
 			<view class="input-box-center" v-else>
-				<input @input="keyInput" :placeholder="placeholder" :disabled="disabled" :value="value" :type="type" :maxlength="maxLength" class="input-box-center-text" />
+				<input :focus="focus" @input="keyInput" :placeholder="placeholder" :disabled="disabled" :value="value" :type="type" :maxlength="maxLength" class="input-box-center-text" />
 			</view>
 			<!-- 清空输入框 -->
 			<view class="input-box-clear" v-show="clearShow && value" @click="clear">
@@ -105,6 +105,10 @@
 			clearShow:{
 				type: Boolean,
 				default: true
+			},
+			focus: {
+				type: Boolean,
+				default: false
 			}
 	    },
 	    data() {
