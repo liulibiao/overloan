@@ -1,4 +1,5 @@
 <script>
+import { mapMutations } from 'vuex'
 export default {
 	onLaunch: function() {
 		    // 页面加载时触发  
@@ -19,6 +20,22 @@ export default {
 		};
 		plus.push.addEventListener('click', _handlePush);
 		plus.push.addEventListener('receive', _handlePush);
+		
+		// 一键登录预登陆，可以显著提高登录速度
+		uni.preLogin({
+			provider: 'univerify',
+			success: (res) => {
+				// 成功
+				this.setUniverifyErrorMsg();
+				console.log("preLogin success: ", res);
+			},
+			fail: (res) => {
+				this.setUniverifyLogin(false);
+				this.setUniverifyErrorMsg(res.errMsg);
+				// 失败
+				console.log("preLogin fail res: ", res);
+			}
+		})
 		// #endif
 	},
 	onShow: function() {
@@ -26,6 +43,9 @@ export default {
 	},
 	onHide: function() {
 		console.log('App Hide');
+	},
+	methods:{
+		...mapMutations(['setUniverifyErrorMsg','setUniverifyLogin'])
 	}
 };
 </script>

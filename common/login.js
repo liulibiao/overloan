@@ -48,7 +48,7 @@ export default function(event) {
 						privacyItems: [
 							// 自定义协议条款，最大支持2个，需要同时设置url和title. 否则不生效
 							{
-								url: `http://localhost:8080/#/pages/my/agree/user`, // 点击跳转的协议详情页面
+								url: `http是/://`, // 点击跳转的协议详情页面
 								title: '《用户协议》' // 协议名称
 							},
 							{

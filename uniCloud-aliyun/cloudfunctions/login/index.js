@@ -2,7 +2,7 @@
 exports.main = async (event, context) => {
 	// event里包含着客户端提交的参数
 	const res = await uniCloud.getPhoneNumber({
-		appid: '', // 替换成自己开通一键登录的应用的DCloud appid，使用callFunction方式调用时可以不传（会自动取当前客户端的appid），如果使用云函数URL化的方式访问必须传此参数
+		appid: '__UNI__6E8711E', // 替换成自己开通一键登录的应用的DCloud appid，使用callFunction方式调用时可以不传（会自动取当前客户端的appid），如果使用云函数URL化的方式访问必须传此参数
 		provider: 'univerify',
 		apiKey: '98cec899f339a9f57acecc8e7492eeb1', // 在开发者中心开通服务并获取apiKey
 		apiSecret: 'e0db749e0cc8185fa51a7a7fee8f9055', // 在开发者中心开通服务并获取apiSecret

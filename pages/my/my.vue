@@ -19,14 +19,12 @@
 </template>
 
 <script>
-import uniIcons from '@/components/uni-icons/uni-icons.vue';
 import feedBack from './feedBack.vue';
 import logout from './logout.vue';
 import login from '@/common/login.js';
 import { goLogin } from '@/common/util.js'
 export default {
 	components: { 
-		uniIcons,
 		feedBack,
 		logout
 		},
@@ -39,6 +37,11 @@ export default {
 				avatarUrl: '../../static/user2.png'
 			},
 			lineItem: [
+				{
+					icon: 'chat',
+					name: '消息中心',
+					type: 'feed'
+				},
 				{
 					icon: 'hand-thumbsup',
 					name: '意见反馈',
