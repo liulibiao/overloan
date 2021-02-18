@@ -4,7 +4,8 @@ function goLogin(onUpdate = null) {
 	return new Promise((resolve, reject) => {
 		const phone = uni.getStorageSync('phoneNumber');
 		if (!phone) {
-			/* #ifndef APP-PLUS-NVUE */
+			/* #ifdef APP-PLUS */
+			
 			login({onUpdate});
 			/* #endif */
 

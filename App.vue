@@ -1,7 +1,25 @@
 <script>
 export default {
 	onLaunch: function() {
+		    // 页面加载时触发  
+		var pinf = plus.push.getClientInfo();  
+		var cid = pinf.clientid;//客户端标识  
+		console.log(cid, 'cid');
+		// uniCloud.callFunction({
+		// 		name: 'push',
+		// 		data: {
+		// 		}
+		// 	})
 		console.log('App Launch');
+		// #ifdef APP-PLUS
+		const _self = this;
+		const _handlePush = function(message) {
+			console.log(message, '推送消息');
+			// TODO
+		};
+		plus.push.addEventListener('click', _handlePush);
+		plus.push.addEventListener('receive', _handlePush);
+		// #endif
 	},
 	onShow: function() {
 		console.log('App Show');
@@ -13,7 +31,7 @@ export default {
 </script>
 
 <style>
-/* #ifndef APP-PLUS-NVUE */
+/* #ifdef APP-PLUS */
 @import 'common/main.css';
 /* uni.css - 通用组件、模板样式库，可以当作一套ui库应用 */
 @import 'common/uni.css';

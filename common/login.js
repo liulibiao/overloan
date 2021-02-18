@@ -95,14 +95,15 @@ export default function(event) {
 				},
 				fail(res) {
 					// 其他登录方式
-					if (res.code == '30002') {
+					if (res.errCode !== 30003) {
+						uni.showToast({
+							title: res.errMsg || '一键登录失败，请尝试其他方式登录',
+						})
 						uni.closeAuthView();
 						uni.navigateTo({
-							url: '/pages/my/login'
+							url: '/pages/my/login',
 						})
-						return;
 					}
-					// 登录失败
 					console.log(res.errCode);
 					console.log(res.errMsg);
 				}
@@ -114,6 +115,10 @@ export default function(event) {
 			// 根据错误信息判断失败原因，如有需要可将错误提交给统计服务器
 			console.log(res.errCode);
 			console.log(res.errMsg);
+			// 预登录失败进入手动登录
+			uni.navigateTo({
+				url: '/pages/my/login'
+			})
 		}
 	});
 
