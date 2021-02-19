@@ -26,7 +26,7 @@
 				@rightClick="onVerification"
 			></input-box>
 		</view>
-		<button type="warn" :disabled="mobile.length > 10 && code.length > 3 ? false : true" class="login-btn" @click="onLogin">登录</button>
+		<button :loading="loading" type="warn" :disabled="mobile.length > 10 && code.length > 3 ? false : true" class="login-btn" @click="onLogin">登录</button>
 		<view class="uni-padding-wrap uni-common-mt">
 			<label class="agree">
 				<evan-checkbox primary-color="#ff6a00" v-model="checked"><text style="color: #888484;">点击同意</text></evan-checkbox>
@@ -47,7 +47,8 @@ export default {
 	components: { inputBox },
 	data() {
 		return {
-			checked: false,
+			loading: false,
+			checked: true,
 			mobile: '',
 			code: '',
 			rightText: '发送验证码'
@@ -75,6 +76,7 @@ export default {
 			if (this.checked) {
 				try {
 					const { mobile, code } = this;
+					this.loading = true;
 					uniCloud.callFunction({
 							name: 'loginsms',
 							data: {
@@ -82,10 +84,29 @@ export default {
 								code
 							}
 						}).then(res => {
-							console.log('登录成功', res);
+							const { token, uid } = res || {};
+							uni.setStorageSync('token', token);
+							uni.setStorageSync('openid', uid);
+							uni.setStorageSync('phoneNumber', mobile);
+							const page = getCurrentPages();
+							this.loading = false;
+							if (page.length > 1) {
+								uni.switchTab({
+								    url: `/${page[0].route}`
+								})
+							} else {
+								uni.switchTab({
+									url: '/pages/home/home'
+								})
+							}
 						});
 				} catch (e) {
+					uni.clearStorageSync();
 					console.log(e, 'err');
+					uni.showToast({
+						title: '登录失败，请稍后再试'
+					})
+					this.loading = false;
 					//TODO handle the exception
 				}
 			} else {

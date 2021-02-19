@@ -7,7 +7,7 @@ exports.main = async function(event, context) {
 	const randomStr = '000' + Math.floor(Math.random() * 1000000)
 	const code = randomStr.substring(randomStr.length - 4)
 	const res = await uniID.sendSmsCode({
-		templateId: '11203',
+		templateId: '11242',
 		mobile,
 		code,
 		type: 'login'
