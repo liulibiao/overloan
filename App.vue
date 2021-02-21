@@ -1,7 +1,9 @@
 <script>
 import { mapMutations } from 'vuex';
+import APPUpdate, { getCurrentNo } from '@/plugins/APPUpdate';
 export default {
 	onLaunch: function() {
+		APPUpdate(true);
 		// #ifdef APP-PLUS
 		//监听push推送通知
 		plus.push.addEventListener('receive', ({ type, title, content, payload }) => {
