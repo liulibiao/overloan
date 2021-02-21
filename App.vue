@@ -1,41 +1,48 @@
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations } from 'vuex';
 export default {
 	onLaunch: function() {
-		    // 页面加载时触发  
-		var pinf = plus.push.getClientInfo();  
-		var cid = pinf.clientid;//客户端标识  
-		console.log(cid, 'cid');
-		// uniCloud.callFunction({
-		// 		name: 'push',
-		// 		data: {
-		// 		}
-		// 	})
-		console.log('App Launch');
 		// #ifdef APP-PLUS
-		const _self = this;
-		const _handlePush = function(message) {
-			console.log(message, '推送消息');
-			// TODO
-		};
-		plus.push.addEventListener('click', _handlePush);
-		plus.push.addEventListener('receive', _handlePush);
-		
+		//监听push推送通知
+		plus.push.addEventListener('receive', ({ type, title, content, payload }) => {
+			//console.log(type,title,content,payload);
+			console.log(type, 'type');
+			if (type == 'receive' || uni.getSystemInfoSync().platform != 'ios') {
+				//如果type!='receive'是自己本地插件的push消息栏，“拦截”避免死循环'，安卓系统没有这个问题
+				if (typeof payload != 'object') {
+					payload = JSON.parse(payload);
+				} //判断是否为object，不是的话手动转一下。hbuilderx 3.0以上版本已经修复此问题可省略
+				plus.ui.alert(payload.title);
+				plus.push.createMessage(content, JSON.stringify(payload), {
+					title: payload.title,
+					subtitle: payload.content
+				});
+			}
+		});
+
+		//监听点击通知栏
+		plus.push.addEventListener('click', function({ payload }) {
+			plus.ui.alert('点击通知栏');
+			uni.switchTab({
+				url: '/pages/home/home'
+			});
+		});
+
 		// 一键登录预登陆，可以显著提高登录速度
 		uni.preLogin({
 			provider: 'univerify',
-			success: (res) => {
+			success: res => {
 				// 成功
 				this.setUniverifyErrorMsg();
-				console.log("preLogin success: ", res);
+				console.log('preLogin success: ', res);
 			},
-			fail: (res) => {
+			fail: res => {
 				this.setUniverifyLogin(false);
 				this.setUniverifyErrorMsg(res.errMsg);
 				// 失败
-				console.log("preLogin fail res: ", res);
+				console.log('preLogin fail res: ', res);
 			}
-		})
+		});
 		// #endif
 	},
 	onShow: function() {
@@ -44,8 +51,8 @@ export default {
 	onHide: function() {
 		console.log('App Hide');
 	},
-	methods:{
-		...mapMutations(['setUniverifyErrorMsg','setUniverifyLogin'])
+	methods: {
+		...mapMutations(['setUniverifyErrorMsg', 'setUniverifyLogin'])
 	}
 };
 </script>

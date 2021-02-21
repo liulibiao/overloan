@@ -1,9 +1,5 @@
 <template>
 	<view class="login">
-<!-- 		<view class="product">
-			<view class="logo"><image src="/static/uni.png"></image></view>
-			<text class="name">闪贷分期</text>
-		</view> -->
 		<view class="title">欢迎回来!</view>
 		<view>
 			<input-box
@@ -178,7 +174,7 @@ export default {
 }
 .login-btn {
 	border-radius: 25px;
-	margin-top: 40rpx;
+	margin: 40rpx 0 20rpx 0;
 }
 .uni-common-mt {
 	display: flex;

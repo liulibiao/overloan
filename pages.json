@@ -21,11 +21,16 @@
 		"path": "pages/my/my",
 		"style": {
 			"app-plus": {
-				"titleNView": true
+				"titleNView": {
+					"buttons": [{
+						"float": "right",
+						"text": "\ue502",  
+						"fontSrc": "/static/uni.ttf"
+					}],
+					"titleText":"我的"
+				}
 			},
-			"navigationBarBackgroundColor": "#F64640",
-			"navigationBarTitleText": "我的",
-			"navigationBarTextStyle": "white"
+			"navigationBarBackgroundColor": "#FFFFFF"
 		}
 	}, {
 		"path": "components/view/view",
@@ -40,7 +45,7 @@
 			"navigationBarTitleText": "登录",
 			"enablePullDownRefresh": false
 		}
-		
+
 	}, {
 		"path": "pages/my/we",
 		"style": {
@@ -49,7 +54,7 @@
 			"navigationBarBackgroundColor": "#F64640",
 			"navigationBarTextStyle": "white"
 		}
-		
+
 	}, {
 		"path": "pages/my/agree/index",
 		"style": {
@@ -58,7 +63,7 @@
 			"navigationBarBackgroundColor": "#F64640",
 			"navigationBarTextStyle": "white"
 		}
-		
+
 	}, {
 		"path": "pages/my/agree/user",
 		"style": {
@@ -75,7 +80,15 @@
 			"navigationBarBackgroundColor": "#F64640",
 			"navigationBarTextStyle": "white"
 		}
-		
+
+	}, {
+		"path": "pages/my/setting/setting",
+		"style": {
+			"navigationBarTitleText": "设置",
+			"enablePullDownRefresh": false,
+			"navigationBarBackgroundColor": "#FFFFFF"
+		}
+
 	}],
 	"globalStyle": {
 		"enablePullDownRefresh": true,

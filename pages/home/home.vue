@@ -1,7 +1,7 @@
 <template>
 	<view class="main">
 		<view class="banner">
-			<swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="300">
+			<swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="300000" duration="300">
 				<swiper-item v-for="(item, index) in swiperList" :key="index">
 					<view @click="onJumpH5(item)" class="item">
 						<view class="title">
@@ -15,7 +15,7 @@
 							</view>
 							<view class="r"><button class="apply-bnt" type="warn">立即申请</button></view>
 						</view>
-						<view>
+						<view style="padding-bottom: 5px;">
 							<uni-icons class="icon" size="16" color="#fff" type="checkbox"></uni-icons>
 							<text>{{ item.msg2 }}</text>
 						</view>

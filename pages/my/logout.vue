@@ -21,7 +21,9 @@
 			},
 			confirm(dome) {
 				uni.clearStorageSync();
-				this.$emit('onLogut');
+				uni.redirectTo({
+					url: '/pages/my/my'
+				});
 				dome();
 			}
 		}
