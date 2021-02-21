@@ -83,7 +83,9 @@ export default function(event) {
 								uni.closeAuthView();
 							} else {
 								uni.showToast({
-									title: '一键登录失败，请重试或使用其他登录方式'
+									title: '一键登录失败，请使用其他登录方式',
+									duration: 3000,
+									icon:'none'
 								})
 							}
 							return ret;
@@ -97,7 +99,9 @@ export default function(event) {
 					// 其他登录方式
 					if (res.errCode !== 30003) {
 						uni.showToast({
-							title: res.errMsg || '一键登录失败，请尝试其他方式登录',
+							title: res.errMsg || '一键登录失败，请使用其他方式登录',
+							duration: 3000,
+							icon:'none'
 						})
 						uni.closeAuthView();
 						uni.navigateTo({

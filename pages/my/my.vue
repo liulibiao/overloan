@@ -1,5 +1,5 @@
 <template>
-	<view class="center">
+	<view>
 		<view class="logo" :hover-class="!phoneNumber ? 'logo-hover' : ''">
 			<image class="logo-img" :src="phoneNumber ? uerInfo.avatarUrl : avatarUrl"></image>
 			<text @click="onLogin" class="uer-name">{{ phoneNumber ? phoneNumber : '点击登录' }}</text>
@@ -59,9 +59,13 @@ export default {
 		};
 	},
 	onNavigationBarButtonTap() {
-		uni.navigateTo({
-			url: '/pages/my/setting/setting'
-		});
+		if (this.phoneNumber) {
+			uni.navigateTo({
+				url: '/pages/my/setting/setting'
+			});
+		} else {
+			this.onLogin();
+		}
 	},
 	onShow() {
 		this.onUserInit();

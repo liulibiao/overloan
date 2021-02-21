@@ -44,7 +44,7 @@ export default {
 	data() {
 		return {
 			loading: false,
-			checked: true,
+			checked: false,
 			mobile: '',
 			code: '',
 			rightText: '发送验证码'
@@ -73,27 +73,37 @@ export default {
 				try {
 					const { mobile, code } = this;
 					this.loading = true;
-					uniCloud.callFunction({
+					uniCloud
+						.callFunction({
 							name: 'loginsms',
 							data: {
 								mobile,
 								code
 							}
-						}).then(res => {
-							const { token, uid } = res || {};
-							uni.setStorageSync('token', token);
-							uni.setStorageSync('openid', uid);
-							uni.setStorageSync('phoneNumber', mobile);
-							const page = getCurrentPages();
+						})
+						.then(res => {
+							const { token, uid, code, msg } = res.result || {};
 							this.loading = false;
-							if (page.length > 1) {
-								uni.switchTab({
-								    url: `/${page[0].route}`
-								})
+							if (code === 0) {
+								uni.setStorageSync('token', token);
+								uni.setStorageSync('openid', uid);
+								uni.setStorageSync('phoneNumber', mobile);
+								const page = getCurrentPages();
+								if (page.length > 1) {
+									uni.switchTab({
+										url: `/${page[0].route}`
+									});
+								} else {
+									uni.switchTab({
+										url: '/pages/home/home'
+									});
+								}
 							} else {
-								uni.switchTab({
-									url: '/pages/home/home'
-								})
+								uni.showToast({
+									title: msg || '登录失败，请稍后再试',
+									duration: 3000,
+									icon: 'none'
+								});
 							}
 						});
 				} catch (e) {
@@ -101,7 +111,7 @@ export default {
 					console.log(e, 'err');
 					uni.showToast({
 						title: '登录失败，请稍后再试'
-					})
+					});
 					this.loading = false;
 					//TODO handle the exception
 				}
@@ -124,13 +134,15 @@ export default {
 				const randomStr = '000' + Math.floor(Math.random() * 1000000);
 				const code = randomStr.substring(randomStr.length - 4);
 				try {
-					uniCloud.callFunction({
+					uniCloud
+						.callFunction({
 							name: 'sendcode',
 							data: {
 								mobile,
 								code
 							}
-						}).then(res => {
+						})
+						.then(res => {
 							console.log('验证码获取成功', res);
 						});
 				} catch (e) {
@@ -142,7 +154,7 @@ export default {
 		onAgree(type) {
 			uni.navigateTo({
 				url: `/pages/my/agree/${type}`
-			})
+			});
 		}
 	}
 };
