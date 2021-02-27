@@ -1,6 +1,6 @@
 <template>
 	<view class="main">
-		<view class="banner">
+		<view v-show="swiperList.length" class="banner">
 			<swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="300">
 				<swiper-item v-for="(item, index) in swiperList" :key="index">
 					<view @click="onJumpH5(item)" class="item">
@@ -42,35 +42,7 @@ export default {
 	},
 	data() {
 		return {
-			swiperList: [
-				{
-					id: 0,
-					title: '蚂蚁借呗-热推',
-					logo: '/static/test/alipay.jpeg',
-					msg1: '今日最高额度(元)',
-					sum: 6000,
-					msg2: '资料简单 下款急速',
-					url: 'http://web.crowd-funding.com.cn/?appMarket=afgarggrrqe'
-				},
-				{
-					id: 1,
-					title: '陆金所-热推',
-					logo: '/static/test/ljs.jpeg',
-					msg1: '今日最高额度(元)',
-					sum: 8000,
-					msg2: '低息秒下款',
-					url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
-				},
-				{
-					id: 2,
-					title: '拍拍贷-热推',
-					logo: '/static/test/paipai.jpg',
-					msg1: '今日最高额度(元)',
-					sum: 10000,
-					msg2: '审核简单 下款急速',
-					url: 'http://web.crowd-funding.com.cn/?appMarket=afgarggrrqe'
-				}
-			],
+			swiperList: [],
 			recommendList: [
 				{
 					id: 0,
@@ -103,12 +75,23 @@ export default {
 					url: 'http://web.crowd-funding.com.cn/?appMarket=afgarggrrqe'
 				}
 			],
-			noticeText: '经统计，同事申请3家以上产品，下款率高达98.6%以上',
+			noticeText: '经统计，同时申请3家以上产品，下款率高达98.6%以上',
 			indicatorDots: true,
 			autoplay: true,
 			interval: 2000,
 			duration: 500
 		};
+	},
+	created() {
+		uni.request({
+			url: 'http://192.168.1.30:8081/app/api/bannerconfig/list',
+			method: 'get',
+			success:function(ret){
+				if (ret.code === 0) {
+					this.swiperList = ret.data || [];
+				}
+			}
+		})
 	},
 	methods: {
 		onJumpH5(item) {

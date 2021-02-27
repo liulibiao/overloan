@@ -1,5 +1,7 @@
 export default function(event) {
-	const { onUpdate } = event || {};
+	const {
+		onUpdate
+	} = event || {};
 	uni.preLogin({
 		provider: 'univerify',
 		success(res) {
@@ -60,49 +62,64 @@ export default function(event) {
 				},
 				success(res) {
 					// 登录成功
-					const { access_token, openid } = res.authResult || {};
+					const {
+						access_token,
+						openid
+					} = res.authResult || {};
 					console.log('一键登录成功', res); // {openid:'deviceIDlength+deviceID+gyuid',access_token:'接口返回的 token'}
 					uni.setStorageSync('token', access_token);
 					uni.setStorageSync('openid', openid);
 					// 客户端(调用云函数)  调用云函数来实现整个业务逻辑
 					// 在得到access_token后，通过callfunction调用云函数
 					uniCloud.callFunction({
-							name: 'login', // 你的云函数名称
-							data: {
-								access_token, // 客户端一键登录接口返回的access_token
-								openid // 客户端一键登录接口返回的openid
-							}
-						}).then(ret => {
-							console.log('获取电话',  ret.result);
-							const { code, data } = ret.result || {};
-							if (code === 0 && data.code === 0) {
-								uni.setStorageSync('phoneNumber', data.phoneNumber);
-								onUpdate && onUpdate(data.phoneNumber);
-								console.log('获取电话成功', data.phoneNumber);
-								// 登录成功，可以关闭一键登陆授权界面了
-								uni.closeAuthView();
-							} else {
-								uni.showToast({
-									title: '一键登录失败，请使用其他登录方式',
-									duration: 3000,
-									icon:'none'
-								})
-							}
-							return ret;
-						}).catch(err => {
-							// 处理错误
-							console.log('获取失败');
-							console.log(err);
-						});
+						name: 'login', // 你的云函数名称
+						data: {
+							access_token, // 客户端一键登录接口返回的access_token
+							openid // 客户端一键登录接口返回的openid
+						}
+					}).then(ret => {
+						console.log('获取电话', ret.result);
+						const {
+							code,
+							data
+						} = ret.result || {};
+						if (code === 0 && data.code === 0) {
+							uni.setStorageSync('phoneNumber', data.phoneNumber);
+							onUpdate && onUpdate(data.phoneNumber);
+							console.log('获取电话成功', data.phoneNumber);
+							// 登录成功，可以关闭一键登陆授权界面了
+							uni.closeAuthView();
+							uni.request({
+								url: 'http://192.168.1.30:8081/app/api/register',
+								method: 'post',
+								data: {
+									mobile: data.phoneNumber
+								}
+							})
+						} else {
+							uni.showToast({
+								title: '一键登录失败，请使用其他登录方式',
+								duration: 3000,
+								icon: 'none'
+							})
+						}
+						return ret;
+					}).catch(err => {
+						// 处理错误
+						console.log('获取失败');
+						console.log(err);
+					});
 				},
 				fail(res) {
 					// 其他登录方式
 					if (res.errCode !== 30003) {
-						uni.showToast({
-							title: res.errMsg || '一键登录失败，请使用其他方式登录',
-							duration: 3000,
-							icon:'none'
-						})
+						if (res.errCode !== 30002) {
+							uni.showToast({
+								title: res.errMsg || '一键登录失败，请使用其他方式登录',
+								duration: 3000,
+								icon: 'none'
+							})
+						}
 						uni.closeAuthView();
 						uni.navigateTo({
 							url: '/pages/my/login',

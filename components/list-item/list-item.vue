@@ -1,24 +1,24 @@
 <template>
 	<view>
-		<view @click="onJumpH5(item)" class="list-item" v-for="(item, index) in list" :key="index">
+		<view @click="onJumpH5(item)" class="list-item" v-for="item in data" :key="item.id">
 			<view class="top-content">
 				<view class="left">
-					<view class="pictrue"><image :src="item.logo" mode=""></image></view>
+					<view class="pictrue"><image :src="item.productLogo" mode=""></image></view>
 					<view class="to-text">
-						<view class="t1">{{ item.t1 }}</view>
-						<view class="t2 color-85">{{ item.t2 }}</view>
+						<view class="t1">{{ item.productName }}</view>
+						<view v-show="item.fastTagShow" class="t2 color-85">{{ item.productTag }}</view>
 					</view>
 				</view>
 				<view class="right"><button type="primary" size="mini">立即领钱</button></view>
 			</view>
 			<view class="align-content fix">
-				<view class="fix-3 color-red">{{ item.scope }}</view>
-				<view class="fix-3 uni-center">{{ item.sum }}</view>
-				<view class="fix-3 f-r color-red">{{ item.deadline }}</view>
+				<view v-show="item.limitTagShow" class="fix-3 color-red">{{ item.productLimit }}</view>
+				<view v-show="item.passTagShow" class="fix-3 uni-center">{{ item.loanNum }}</view>
+				<view class="fix-3 f-r color-red">{{ item.productFast }}</view>
 			</view>
 			<view class="fix">
-				<view class="fix-3 color-85">额度范围(元)</view>
-				<view class="fix-3 uni-center color-85">成功下款</view>
+				<view v-show="item.limitTagShow" class="fix-3 color-85">额度范围(元)</view>
+				<view v-show="item.passTagShow" class="fix-3 uni-center color-85">成功下款</view>
 				<view class="fix-3 f-r color-85">期限</view>
 			</view>
 		</view>
@@ -27,6 +27,7 @@
 
 <script>
 import { goLogin } from '@/common/util.js';
+import { mapActions } from 'vuex'
 export default {
 	name: 'list-item',
 	props: {
@@ -38,15 +39,32 @@ export default {
 		}
 	},
 	data() {
-		return {};
+		return {
+			data: []
+		};
+	},
+	created() {
+		uni.showLoading({
+		    title: '加载中'
+		});
+		this.productconfig().then(ret => {
+			const { data } = ret.data || {};
+			this.data = data;
+			uni.hideLoading();
+		})
 	},
 	methods: {
+		...mapActions(['behaviour','productconfig']),
 		onJumpH5(item) {
+			// plus.device.uuid
+			this.behaviour('123456789');
+			return;
 			goLogin().then(phone => {
 				if (phone) {
-					const { url, t1 } = item || {};
+					this.behaviour('123456789');
+					const { productUrl, t1 } = item || {};
 					uni.navigateTo({
-						url: `/components/view/view?title=${t1}&url=${url}`
+						url: `/components/view/view?title=${t1}&url=${productUrl}`
 					})
 				}
 			});
@@ -119,6 +137,7 @@ export default {
 	uni-button {
 		background-color: #f55240;
 	}
+	
 }
 .pictrue {
 	display: inline-block;

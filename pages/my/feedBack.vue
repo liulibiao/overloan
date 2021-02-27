@@ -19,8 +19,33 @@
 				done();
 			},
 			confirm(dome, value) {
-				console.log(value);
-				dome();
+				uni.showLoading({
+					title: '加载中'
+				})
+				uni.request({
+					url: 'http://192.168.1.38:8081/app/api/feedback/save',
+					method: 'post',
+					data: {
+						mobile: uni.getStorageSync('phoneNumber'),
+						feedbackInfo: value
+					},
+					success: (ret) => {
+						uni.hideLoading();
+						uni.showToast({
+							title: '感谢您的反馈',
+							duration: 1500,
+							icon: 'none'
+						})
+						dome();
+					},
+					fail: () => {
+						uni.showToast({
+							title: '操作失败',
+							duration: 1500,
+							icon: 'none'
+						})
+					}
+				})
 			}
 		}
 	}

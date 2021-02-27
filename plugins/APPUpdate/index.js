@@ -17,21 +17,22 @@ export const getCurrentNo = function(callback) {
 	plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 		callback && callback({
 			versionCode: inf.versionCode,
-			versionName: inf.version
+			versionName: inf.version,
+			channelCode: inf.appid
 		});
 	});
 }
 // 发起ajax请求获取服务端版本号
-const getServerNo = function(version,isPrompt = false, callback) {
-	let httpData = {
-		version: version.versionCode,
-        versionName: version.versionName
-	};
-	if (platform == "android") {
-		httpData.type = 1101;
-	} else {
-		httpData.type = 1102;
-	}
+const getServerNo = function(wgtinfo, isPrompt = false, callback) {
+	// let httpData = {
+	// 	version: version.versionCode,
+ //        versionName: version.versionName
+	// };
+	// if (platform == "android") {
+	// 	httpData.type = 1101;
+	// } else {
+	// 	httpData.type = 1102;
+	// }
 	/* 接口入参说明
 	 * version: 应用当前版本号（已自动获取）
 	 * versionName: 应用当前版本名称（已自动获取）
@@ -39,11 +40,14 @@ const getServerNo = function(version,isPrompt = false, callback) {
 	 */
 	/****************以下是示例*******************/
 	// 可以用自己项目的请求方法
+	const { channelCode, versionCode, versionName } = wgtinfo || {};
 	uni.request({
-		url: 'api/common/v1/app_version',
+		url: 'http://192.168.1.38:8081/app/api/version/info',
 		method: 'GET',
 		data: {
-			isPrompt: isPrompt
+			versionCode,
+			versionName,
+			channelCode
 		},
 		success: (res) => {
 			/* res的数据说明
@@ -55,13 +59,16 @@ const getServerNo = function(version,isPrompt = false, callback) {
 			 * | forceUpdate	 | y	    | boolean	| 是否强制更新  |
 			 * | downloadUrl	 | y	    | String	| 版本下载链接（IOS安装包更新请放跳转store应用商店链接,安卓apk和wgt文件放文件下载链接）  |
 			 */
-			if (res && res.downloadUrl) {
-				callback && callback(res);
-			} else if (isPrompt) {
-				uni.showToast({
-					title: "暂无新版本",
-					icon: "none"
-				});
+			const { code, data } = res.data || {};
+			if (code === 0 && data) {
+				if (data.downloadUrl) {
+					callback && callback(data);
+				} else if (isPrompt) {
+					uni.showToast({
+						title: "暂无新版本",
+						icon: "none"
+					});
+				}
 			}
 		},
 		fail: (e) => {
@@ -71,29 +78,6 @@ const getServerNo = function(version,isPrompt = false, callback) {
 			// })
 		}
 	})
-	
-	// $http.get("api/common/v1/app_version", httpData,{
-	// 	isPrompt: isPrompt
-	// }).then(res => {
-	// 	/* res的数据说明
-	// 	 * | 参数名称	     | 一定返回 	| 类型	    | 描述
-	// 	 * | -------------|--------- | --------- | ------------- |
-	// 	 * | versionCode	 | y	    | int	    | 版本号        |
-	// 	 * | versionName	 | y	    | String	| 版本名称      |
-	// 	 * | versionInfo	 | y	    | String	| 版本信息      |
-	// 	 * | forceUpdate	 | y	    | boolean	| 是否强制更新  |
-	// 	 * | downloadUrl	 | y	    | String	| 版本下载链接（IOS安装包更新请放跳转store应用商店链接,安卓apk和wgt文件放文件下载链接）  |
-	// 	 */
-	// 	if (res && res.downloadUrl) {
-	// 		callback && callback(res);
-	// 	} else if (isPrompt) {
-	// 		uni.showToast({
-	// 			title: "暂无新版本",
-	// 			icon: "none"
-	// 		});
-	// 	}
-	// });
-	/****************以上是示例*******************/
 }
 // 从服务器下载应用资源包（wgt文件）
 const getDownload = function(data) {
@@ -803,7 +787,7 @@ function downloadPopup(data) {
 export default function(isPrompt = false) {
 	getCurrentNo(versionInfo => {
 		getServerNo(versionInfo,isPrompt, res => {
-			if (res.forceUpdate) {
+			if (res.forceUpdate === 1) {
 				if (/\.wgt$/i.test(res.downloadUrl)) {
 					getDownload(res);
 				} else if(/\.html$/i.test(res.downloadUrl)){

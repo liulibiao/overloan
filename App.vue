@@ -1,10 +1,14 @@
 <script>
-import { mapMutations } from 'vuex';
-import APPUpdate, { getCurrentNo } from '@/plugins/APPUpdate';
+import { mapMutations, mapActions } from 'vuex';
+import APPUpdate from '@/plugins/APPUpdate';
 export default {
 	onLaunch: function() {
-		APPUpdate(true);
 		// #ifdef APP-PLUS
+		// 行为上报
+		if (uni.getStorageSync('phoneNumber')) {
+			this.behaviour('');
+		}
+		
 		//监听push推送通知
 		plus.push.addEventListener('receive', ({ type, title, content, payload }) => {
 			//console.log(type,title,content,payload);
@@ -45,6 +49,8 @@ export default {
 				console.log('preLogin fail res: ', res);
 			}
 		});
+		
+		APPUpdate();
 		// #endif
 	},
 	onShow: function() {
@@ -54,6 +60,7 @@ export default {
 		console.log('App Hide');
 	},
 	methods: {
+		...mapActions(['behaviour']),
 		...mapMutations(['setUniverifyErrorMsg', 'setUniverifyLogin'])
 	}
 };

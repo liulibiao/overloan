@@ -11,7 +11,6 @@
 				placeholder="请输入手机号码"
 				maBtm="10"
 				maxLength="11"
-				focus="true"
 			></input-box>
 			<input-box
 				v-model="code"
@@ -37,6 +36,7 @@
 
 <script>
 import inputBox from '@/components/input-box/input-box';
+import { mapActions } from 'vuex'
 
 export default {
 	name: 'login',
@@ -52,6 +52,7 @@ export default {
 	},
 
 	methods: {
+		...mapActions(['register']),
 		// 倒计时
 		onCountdown() {
 			let num = 60;
@@ -85,6 +86,7 @@ export default {
 							const { token, uid, code, msg } = res.result || {};
 							this.loading = false;
 							if (code === 0) {
+								this.register(mobile);
 								uni.setStorageSync('token', token);
 								uni.setStorageSync('openid', uid);
 								uni.setStorageSync('phoneNumber', mobile);
@@ -134,8 +136,7 @@ export default {
 				const randomStr = '000' + Math.floor(Math.random() * 1000000);
 				const code = randomStr.substring(randomStr.length - 4);
 				try {
-					uniCloud
-						.callFunction({
+					uniCloud.callFunction({
 							name: 'sendcode',
 							data: {
 								mobile,

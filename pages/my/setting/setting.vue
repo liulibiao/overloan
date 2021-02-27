@@ -4,7 +4,8 @@
 			<view class="center-list-item" v-for="(item, index) in lineItem" :class="{ 'border-bottom': lineItem.length > index + 1 }" :key="item.icon" @click="onClickLine(item.type)">
 				<!-- <uni-icons color="#f55652" style="margin-right: 15upx" class="list-icon" :type="item.icon" size="15"></uni-icons> -->
 				<text class="list-text">{{ item.name }}</text>
-				<text v-if="item.type === 'qq'" class="qq">2892848887</text>
+				<text v-if="item.type === 'qq'" class="line">2892848887</text>
+				<text v-if="item.type === 'versions'" class="line">{{versionName}}</text>
 				<uni-icons color="#555" class="list-icon" type="arrowright" size="15"></uni-icons>
 			</view>
 		</view>
@@ -18,6 +19,7 @@
 <script>
 import feedBack from '../feedBack.vue';
 import { goLogin } from '@/common/util.js';
+import APPUpdate, { getCurrentNo } from '@/plugins/APPUpdate/index.js';
 export default {
 	name: 'setting',
 	components: {
@@ -25,6 +27,7 @@ export default {
 	},
 	data() {
 		return {
+			versionName: '1.0.0',
 			lineItem: [
 				{
 					name: '意见反馈',
@@ -47,13 +50,20 @@ export default {
 					name: '注销账号',
 					type: 'logout'
 				},
-				// {
-				// 	icon: 'info',
-				// 	name: '当前版本',
-				// 	type: 'versions'
-				// }
+				{
+					icon: 'info',
+					name: '当前版本',
+					type: 'versions'
+				}
 			]
 		};
+	},
+	created() {		
+		// #ifdef APP-PLUS
+		getCurrentNo(res => {
+			this.versionName = res.versionName
+		});
+		// #endif
 	},
 	methods: {
 		onOutModal(content) {
@@ -94,6 +104,17 @@ export default {
 					this.onOutModal('确定要注销账号吗');
 					break;
 				case 'versions':
+					// #ifdef APP-PLUS
+					// true 在出现无新版本的情况下，有弹窗提示
+					// false 无提示（一般在APP.vue使用）
+					APPUpdate(true);
+					// #endif
+					// #ifndef APP-PLUS
+					uni.showToast({
+						title:"请在APP环境使用",
+						icon:"none"
+					});
+					// #endif
 					break;
 			}
 		}
@@ -135,7 +156,7 @@ export default {
 .out-btn {
 	margin: 60rpx 30rpx 30rpx 30rpx;
 }
-.qq {
+.line {
 	color: #b1aaaa;
 	display: flex;
 	align-items: center;
