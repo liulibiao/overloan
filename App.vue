@@ -3,10 +3,14 @@ import { mapMutations, mapActions } from 'vuex';
 import APPUpdate from '@/plugins/APPUpdate';
 export default {
 	onLaunch: function() {
+		
 		// #ifdef APP-PLUS
 		// 行为上报
-		if (uni.getStorageSync('phoneNumber')) {
-			this.behaviour('');
+		if (!uni.getStorageSync('phoneNumber')) {
+			this.behaviour({
+				statTypeDataId: plus.device.uuid,
+				statType: 'guest'
+			});
 		}
 		
 		//监听push推送通知

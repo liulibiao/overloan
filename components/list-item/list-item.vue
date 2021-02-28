@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view @click="onJumpH5(item)" class="list-item" v-for="item in data" :key="item.id">
+		<view @click="onJumpH5(item)" class="list-item" v-for="item in $store.state.productData" :key="item.id">
 			<view class="top-content">
 				<view class="left">
 					<view class="pictrue"><image :src="item.productLogo" mode=""></image></view>
@@ -44,27 +44,16 @@ export default {
 		};
 	},
 	created() {
-		uni.showLoading({
-		    title: '加载中'
-		});
-		this.productconfig().then(ret => {
-			const { data } = ret.data || {};
-			this.data = data;
-			uni.hideLoading();
-		})
+		this.productconfig();
 	},
 	methods: {
-		...mapActions(['behaviour','productconfig']),
+		...mapActions(['productconfig']),
 		onJumpH5(item) {
-			// plus.device.uuid
-			this.behaviour('123456789');
-			return;
 			goLogin().then(phone => {
 				if (phone) {
-					this.behaviour('123456789');
-					const { productUrl, t1 } = item || {};
+					const { productUrl, productName, id } = item || {};
 					uni.navigateTo({
-						url: `/components/view/view?title=${t1}&url=${productUrl}`
+						url: `/components/view/view?title=${productName}&url=${productUrl}&id=${id}`
 					})
 				}
 			});

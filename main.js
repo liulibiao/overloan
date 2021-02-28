@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import App from './App'
 import store from './store'
-
+import http from './common/http.js';
 Vue.config.productionTip = false
 
 Vue.prototype.$store = store
+Vue.prototype.$http = http;
 
 App.mpType = 'app'
 

@@ -1,3 +1,5 @@
+import store from '../store/index.js';
+
 export default function(event) {
 	const {
 		onUpdate
@@ -84,17 +86,16 @@ export default function(event) {
 							data
 						} = ret.result || {};
 						if (code === 0 && data.code === 0) {
-							uni.setStorageSync('phoneNumber', data.phoneNumber);
-							onUpdate && onUpdate(data.phoneNumber);
-							console.log('获取电话成功', data.phoneNumber);
+							const phoneNumber = data.phoneNumber;
+							uni.setStorageSync('phoneNumber', phoneNumber);
+							onUpdate && onUpdate(phoneNumber);
+							console.log('获取电话成功', phoneNumber);
 							// 登录成功，可以关闭一键登陆授权界面了
 							uni.closeAuthView();
-							uni.request({
-								url: 'http://192.168.1.30:8081/app/api/register',
-								method: 'post',
-								data: {
-									mobile: data.phoneNumber
-								}
+							// 上报注册用户
+							store.dispatch('behaviour', {
+								statTypeDataId: phoneNumber,
+								statType: 'register'
 							})
 						} else {
 							uni.showToast({

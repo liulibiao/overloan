@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import http from '../common/http.js';
 
 Vue.use(Vuex)
 
@@ -16,32 +17,21 @@ const store = new Vuex.Store({
 		},
 		setUniverifyErrorMsg(state,payload = ''){
 			state.univerifyErrorMsg = payload
+		},
+		setProduct(state, payload) {
+			state.productData = payload.data || []
 		}
 	},
 	actions: {
 		behaviour: function({ // 行为上报
 			commit
-		}, uuid) {
+		}, data) {
 			return new Promise((resolve, reject) => {
-				uni.request({
-					url: 'http://192.168.1.38:8081/app/api/behaviour/collect/app',
+				http({
+					url: 'api/behaviour/collect/app',
 					method: 'post',
-					data: {uuid},
-					success: (ret) => {
-						resolve(ret);
-					}
-				})
-			});
-		},
-		register: function({ // 注册
-			commit
-		}, mobile) {
-			return new Promise((resolve, reject) => {
-				uni.request({
-					url: 'http://192.168.1.38:8081/app/api/register',
-					method: 'post',
-					data: {mobile},
-					success: (ret) => {
+					data,
+					callback: (ret) => {
 						resolve(ret);
 					}
 				})
@@ -51,11 +41,12 @@ const store = new Vuex.Store({
 			commit
 		}, data) {
 			return new Promise((resolve, reject) => {
-				uni.request({
-					url: 'http://192.168.1.30:8081/app/api/productconfig/list',
+				http({
+					url: 'api/productconfig/list',
 					method: 'get',
 					data,
-					success: (ret) => {
+					callback: (ret) => {
+						commit('setProduct', ret)
 						resolve(ret);
 					}
 				})

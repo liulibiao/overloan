@@ -5,7 +5,7 @@
 				<swiper-item v-for="(item, index) in swiperList" :key="index">
 					<view @click="onJumpH5(item)" class="item">
 						<view class="title">
-							<view class="logo"><image :src="item.logo"></image></view>
+							<view class="logo"><image :src="item.productLogo"></image></view>
 							<text class="text">{{ item.title }}</text>
 						</view>
 						<view class="apply-row">
@@ -26,7 +26,7 @@
 		<view><uni-notice-bar backgroundColor="#f5dfdc" :speed="40" scrollable="true" single="true" showIcon="true" :text="noticeText"></uni-notice-bar></view>
 		<view class="recommend">
 			<view class="title">热门推荐</view>
-			<list-item :list="recommendList"></list-item>
+			<list-item ></list-item>
 		</view>
 	</view>
 </template>
@@ -34,6 +34,7 @@
 <script>
 import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue';
 import listItem from '@/components/list-item/list-item.vue';
+import { mapActions } from 'vuex'
 import { goLogin } from '@/common/util.js';
 export default {
 	components: {
@@ -43,38 +44,6 @@ export default {
 	data() {
 		return {
 			swiperList: [],
-			recommendList: [
-				{
-					id: 0,
-					t1: '秒借分期-热推',
-					t2: '资料简单 下款急速',
-					logo: '/static/test/alipay.jpeg',
-					scope: '6000-8000',
-					sum: '2424342人',
-					deadline: '1-9个月',
-					url: 'http://web.crowd-funding.com.cn/?appMarket=afgarggrrqe'
-				},
-				{
-					id: 1,
-					t1: '牛牛万卡-热推',
-					t2: '资料简单 下款急速',
-					logo: '/static/test/ljs.jpeg',
-					scope: '4000-6000',
-					sum: '2424342人',
-					deadline: '1-9个月',
-					url: 'https://h.zjrkcc.cn/?tg_id=90516&from=sem32&utm_source=rxd&utm_medium=cpa&utm'
-				},
-				{
-					id: 2,
-					t1: '凤凰应急-防水',
-					t2: '资料简单 下款急速',
-					logo: '/static/test/paipai.jpg',
-					scope: '3000-6000',
-					sum: '2424342人',
-					deadline: '1-9个月',
-					url: 'http://web.crowd-funding.com.cn/?appMarket=afgarggrrqe'
-				}
-			],
 			noticeText: '经统计，同时申请3家以上产品，下款率高达98.6%以上',
 			indicatorDots: true,
 			autoplay: true,
@@ -83,10 +52,10 @@ export default {
 		};
 	},
 	created() {
-		uni.request({
-			url: 'http://192.168.1.30:8081/app/api/bannerconfig/list',
+		this.$http({
+			url: 'api/bannerconfig/list',
 			method: 'get',
-			success:function(ret){
+			callback:(ret) => {
 				if (ret.code === 0) {
 					this.swiperList = ret.data || [];
 				}
@@ -94,19 +63,21 @@ export default {
 		})
 	},
 	methods: {
+		...mapActions(['productconfig']),
 		onJumpH5(item) {
 			goLogin().then(phone => {
 				if (phone) {
-					const { url, title } = item || {};
+					const { productUrl, productName, id } = item || {};
 					uni.navigateTo({
-						url: `/components/view/view?title=${title}&url=${url}`
+						url: `/components/view/view?title=${productName}&url=${productUrl}&id=${id}`
 					})
 				}
 			});
 		}
 	},
-	mounted() {
-
+	async onPullDownRefresh() {
+		await this.productconfig();
+		uni.stopPullDownRefresh();
 	}
 };
 </script>

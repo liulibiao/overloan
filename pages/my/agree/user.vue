@@ -1,8 +1,26 @@
 <template>
-	<text>用户协议</text>
+	<view>
+		<rich-text :nodes="strings"></rich-text>
+	</view>
 </template>
 
 <script>
+	export default {
+		data() {
+			return {
+				strings: ''
+			}
+		},
+		created() {
+			this.$http({
+				url: 'api/privateagreement/info/0',
+				method: 'get',
+				callback: ret => {
+					this.strings = ret.data.agreementInfo;
+				}
+			})
+		}
+	}
 </script>
 
 <style>

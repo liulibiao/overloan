@@ -5,6 +5,8 @@
 </template>
 <script>
 import navBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
+import { mapActions } from 'vuex'
+
 export default {
 	components: { navBar },
 	name: 'view-page',
@@ -19,11 +21,18 @@ export default {
 		};
 	},
 	onLoad: function(optioin) {
-		const { title, url } = optioin;
+		const { title, url, id } = optioin;
 		this.url = url;
 		uni.setNavigationBarTitle({
 			title
 		});
+		this.behaviour({
+			statTypeDataId: id,
+			statType: 'view'
+		});
+	},
+	methods: {
+		...mapActions(['behaviour']),
 	}
 };
 </script>

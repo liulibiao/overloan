@@ -1,5 +1,4 @@
 import login from '@/common/login.js';
-
 function goLogin(onUpdate = null) {
 	return new Promise((resolve, reject) => {
 		const phone = uni.getStorageSync('phoneNumber');

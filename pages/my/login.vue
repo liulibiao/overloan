@@ -52,7 +52,7 @@ export default {
 	},
 
 	methods: {
-		...mapActions(['register']),
+		...mapActions(['behaviour']),
 		// 倒计时
 		onCountdown() {
 			let num = 60;
@@ -86,7 +86,6 @@ export default {
 							const { token, uid, code, msg } = res.result || {};
 							this.loading = false;
 							if (code === 0) {
-								this.register(mobile);
 								uni.setStorageSync('token', token);
 								uni.setStorageSync('openid', uid);
 								uni.setStorageSync('phoneNumber', mobile);
@@ -100,6 +99,10 @@ export default {
 										url: '/pages/home/home'
 									});
 								}
+								this.behaviour({
+									statTypeDataId: mobile,
+									statType: 'register'
+								});
 							} else {
 								uni.showToast({
 									title: msg || '登录失败，请稍后再试',
