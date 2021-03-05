@@ -11,7 +11,6 @@
 <script>
 import listItme from '@/components/list-item/list-item.vue';
 import login from '@/common/login.js';
-import { goLogin } from '@/common/util.js';
 import { mapActions } from 'vuex'
 
 export default {

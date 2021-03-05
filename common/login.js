@@ -1,4 +1,5 @@
 import store from '../store/index.js';
+import Vue from 'vue';
 
 export default function(event) {
 	const {
@@ -125,9 +126,18 @@ export default function(event) {
 						uni.navigateTo({
 							url: '/pages/my/login',
 						})
+					} else {
+						if(Vue.prototype.isLogin) {
+							uni.navigateTo({
+								url: '/pages/my/login',
+							})
+							uni.showToast({
+								title: '请先登录',
+								duration: 3000,
+								icon: 'none'
+							});
+						}
 					}
-					console.log(res.errCode);
-					console.log(res.errMsg);
 				}
 			});
 		},

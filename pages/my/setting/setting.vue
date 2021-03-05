@@ -70,12 +70,18 @@ export default {
 			uni.showModal({
 			    title: '温馨提示',
 			    content,
-			    success: function (res) {
+			    success: (res) => {
 			        if (res.confirm) {
 			            uni.clearStorageSync();
-			            uni.switchTab({
-			            	url: '/pages/my/my'
-			            });
+						if (this.isLogin) {
+							uni.navigateTo({
+								url: '/pages/my/uniLogin'
+							})
+						} else {
+							uni.switchTab({
+								url: '/pages/my/my'
+							});
+						}
 			        } else if (res.cancel) {
 			            console.log('用户点击取消');
 			        }

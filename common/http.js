@@ -1,5 +1,6 @@
 import { getCurrentNo } from '@/plugins/APPUpdate/index.js';
 const apiBaseUrl = 'http://192.168.1.30:8081/app/'
+import Vue from 'vue';
 
 // 不需要登录的接口
 const noToken = [
@@ -9,36 +10,32 @@ const noToken = [
 export default function({url, method, data, callback, hideLoading}) {
 	// 请求头信息
 	const headers = {
-		// 'appId': '__UNI__6E8711E',
-		// 'deviceId': '3456723423423',
-		// 'telephone': 15000381110
+		'appId': '__UNI__6E8711E',
+		'name': '借得快'
 	};
 	
 	// #ifdef APP-PLUS
-	// getCurrentNo(res => {
-	// 	const { versionName, appid, name} = res || {};
-	// 	headers['appId'] = appid;
-	// 	headers['name'] = name;
-	// });
+	getCurrentNo(res => {
+		const { channelCode} = res || {};
+		headers['appId'] = channelCode;
+	});
 	headers['deviceId'] = plus.device.uuid;
-	headers['appId'] = '__UNI__6E8711E';
-	headers['name'] = '借得快';
 	headers['telephone'] = uni.getStorageSync('phoneNumber')
 	// #endif
 	
 	// 判断是否需要登录
-	// if (!(noToken.indexOf(url) >= 0)) {
-	// 	// 获取用户电话
-	// 	let telephone = uni.getStorageSync('phoneNumber')
-	// 	if (!telephone) {
-	// 		uni.navigateTo({
-	// 			url: '/pages/my/login'
-	// 		})
-	// 		return false;
-	// 	} else {
-	// 		headers['telephone'] = telephone
-	// 	}
-	// }
+	if (!(noToken.indexOf(url) >= 0)) {
+		// 获取用户电话
+		let telephone = uni.getStorageSync('phoneNumber')
+		if (Vue.prototype.isLogin && !telephone) {
+			uni.navigateTo({
+				url: '/pages/my/uniLogin'
+			})
+			return false;
+		} else {
+			headers['telephone'] = telephone
+		}
+	}
 
 	// 如果调用接口不明确不显示 loading
 	if (!hideLoading) {
@@ -46,6 +43,7 @@ export default function({url, method, data, callback, hideLoading}) {
 			title: '加载中'
 		});
 	}
+	
 	uni.request({
 		url: apiBaseUrl + url,
 		data,
