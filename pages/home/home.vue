@@ -5,19 +5,19 @@
 				<swiper-item v-for="(item, index) in swiperList" :key="index">
 					<view @click="onJumpH5(item)" class="item">
 						<view class="title">
-							<view class="logo"><image :src="item.productLogo"></image></view>
-							<text class="text">{{ item.title }}</text>
+							<view class="logo"><image :src="url+item.productLogo"></image></view>
+							<text class="text">{{ item.productName }}</text>
 						</view>
 						<view class="apply-row">
 							<view class="l">
-								<view class="msg1">{{ item.msg1 }}</view>
-								<view class="sum">{{ item.sum }}</view>
+								<view class="msg1">今日最高额度(元)</view>
+								<view class="sum">{{ item.productLimitUp }} 8000</view>
 							</view>
 							<view class="r"><button class="apply-bnt" type="warn">立即申请</button></view>
 						</view>
 						<view style="padding-bottom: 5px;">
 							<uni-icons class="icon" size="16" color="#fff" type="checkbox"></uni-icons>
-							<text>{{ item.msg2 }}</text>
+							<text>{{ item.productTag }}</text>
 						</view>
 					</view>
 				</swiper-item>
@@ -43,6 +43,7 @@ export default {
 	},
 	data() {
 		return {
+			url: 'http://af6c31881353.ngrok.io/image/',
 			swiperList: [],
 			noticeText: '经统计，同时申请3家以上产品，下款率高达98.6%以上',
 			indicatorDots: true,

@@ -8,7 +8,7 @@ Vue.prototype.$store = store
 Vue.prototype.$http = http;
 
 // 是否只有登录才能访问
-Vue.prototype.isLogin = true;
+Vue.prototype.isLogin = false;
 
 App.mpType = 'app'
 

@@ -44,7 +44,7 @@ export default function(event) {
 						borderColor: '#c5c5c5' //边框颜色 默认值： #c5c5c5（仅ios支持）
 					},
 					privacyTerms: {
-						defaultCheckBoxState: 'true', // 条款勾选框初始状态 默认值： true
+						defaultCheckBoxState: 'false', // 条款勾选框初始状态 默认值： true
 						textColor: '#8a8b90', // 文字颜色 默认值：#8a8b90
 						termsColor: '#1d4788', //  协议文字颜色 默认值： #1d4788
 						prefix: '我已阅读并同意', // 条款前的文案 默认值：“我已阅读并同意”
@@ -53,7 +53,7 @@ export default function(event) {
 						privacyItems: [
 							// 自定义协议条款，最大支持2个，需要同时设置url和title. 否则不生效
 							{
-								url: `http是/://`, // 点击跳转的协议详情页面
+								url: `http://`, // 点击跳转的协议详情页面
 								title: '《用户协议》' // 协议名称
 							},
 							{

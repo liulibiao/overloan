@@ -31,7 +31,7 @@ export default {
 	onNavigationBarButtonTap() {
 		if (this.phoneNumber) {
 			uni.navigateTo({
-				url: '/pages/my/setting/setting'
+				url: '/pages/my/setting'
 			});
 		} else {
 			this.onLogin();
@@ -56,7 +56,8 @@ export default {
 		// 登录
 		onLogin() {
 			if (!this.phoneNumber) {
-				/* #ifndef APP-PLUS */
+			debugger
+				// #ifdef APP-PLUS
 				login({
 					onUpdate: e => {
 						if (e) {
@@ -64,14 +65,14 @@ export default {
 						}
 					}
 				});
-				/* #endif */
+				// #endif
 
 				/* H5 兼容 pc 所需 */
-				/* #ifdef H5 */
+				// #ifdef H5 
 				uni.navigateTo({
 					url: '/pages/my/login'
 				});
-				/* #endif */
+				// #endif
 			}
 		},
 		

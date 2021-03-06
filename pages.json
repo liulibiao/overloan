@@ -47,21 +47,10 @@
 		}
 
 	}, {
-		"path": "pages/my/we",
+		"path": "pages/my/uniLogin",
 		"style": {
-			"navigationBarTitleText": "关于我们",
-			"enablePullDownRefresh": false,
-			"navigationBarBackgroundColor": "#F64640",
-			"navigationBarTextStyle": "white"
-		}
-
-	}, {
-		"path": "pages/my/agree/index",
-		"style": {
-			"navigationBarTitleText": "软件协议",
-			"enablePullDownRefresh": false,
-			"navigationBarBackgroundColor": "#F64640",
-			"navigationBarTextStyle": "white"
+			"navigationBarTitleText": "登录",
+			"enablePullDownRefresh": false
 		}
 
 	}, {
@@ -82,7 +71,7 @@
 		}
 
 	}, {
-		"path": "pages/my/setting/setting",
+		"path": "pages/my/setting",
 		"style": {
 			"navigationBarTitleText": "设置",
 			"enablePullDownRefresh": false,

@@ -22,6 +22,7 @@ export default {
 	},
 	onLoad: function(optioin) {
 		const { title, url, id } = optioin;
+		debugger
 		this.url = url;
 		uni.setNavigationBarTitle({
 			title

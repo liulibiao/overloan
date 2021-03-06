@@ -3,18 +3,17 @@ function goLogin(onUpdate = null) {
 	return new Promise((resolve, reject) => {
 		const phone = uni.getStorageSync('phoneNumber');
 		if (!phone) {
-			/* #ifdef APP-PLUS */
-			
+			// #ifdef APP-PLUS
 			login({onUpdate});
-			/* #endif */
+			// #endif
 
 			/* H5 兼容 pc 所需 */
-			/* #ifdef H5 */
+			// #ifdef H5
 			uni.navigateTo({
 				url: '/pages/my/login'
 			});
 			resolve(null);
-			/* #endif */
+			// #endif
 		} else {
 			resolve(phone);
 		}

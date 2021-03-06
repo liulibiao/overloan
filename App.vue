@@ -32,7 +32,6 @@ export default {
 
 		//监听点击通知栏
 		plus.push.addEventListener('click', function({ payload }) {
-			plus.ui.alert('点击通知栏');
 			uni.switchTab({
 				url: '/pages/home/home'
 			});

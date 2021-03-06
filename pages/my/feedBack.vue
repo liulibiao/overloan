@@ -23,7 +23,7 @@
 					title: '加载中'
 				})
 				uni.request({
-					url: 'http://192.168.1.38:8081/app/api/feedback/save',
+					url: 'http://af6c31881353.ngrok.io/api/feedback/save',
 					method: 'post',
 					data: {
 						mobile: uni.getStorageSync('phoneNumber'),

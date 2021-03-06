@@ -3,22 +3,22 @@
 		<view @click="onJumpH5(item)" class="list-item" v-for="item in $store.state.productData" :key="item.id">
 			<view class="top-content">
 				<view class="left">
-					<view class="pictrue"><image :src="item.productLogo" mode=""></image></view>
+					<view class="pictrue"><image :src="url+item.productLogo" mode=""></image></view>
 					<view class="to-text">
 						<view class="t1">{{ item.productName }}</view>
-						<view v-show="item.fastTagShow" class="t2 color-85">{{ item.productTag }}</view>
+						<view class="t2 color-85">{{ item.fastTagShow ? item.productTag : '' }}</view>
 					</view>
 				</view>
 				<view class="right"><button type="primary" size="mini">立即领钱</button></view>
 			</view>
 			<view class="align-content fix">
-				<view v-show="item.limitTagShow" class="fix-3 color-red">{{ item.productLimit }}</view>
-				<view v-show="item.passTagShow" class="fix-3 uni-center">{{ item.loanNum }}</view>
+				<view class="fix-3 color-red">{{ item.limitTagShow ? item.productLimitLow +'-'+ item.productLimitUp : '' }}</view>
+				<view  class="fix-3 uni-center">{{ item.passTagShow ? item.loanNum : '' }}</view>
 				<view class="fix-3 f-r color-red">{{ item.productFast }}</view>
 			</view>
 			<view class="fix">
-				<view v-show="item.limitTagShow" class="fix-3 color-85">额度范围(元)</view>
-				<view v-show="item.passTagShow" class="fix-3 uni-center color-85">成功下款</view>
+				<view class="fix-3 color-85">{{item.limitTagShow ? '额度范围(元)' : ''}}</view>
+				<view class="fix-3 uni-center color-85">{{ item.passTagShow ? '成功下款' : ''}}</view>
 				<view class="fix-3 f-r color-85">期限</view>
 			</view>
 		</view>
@@ -40,6 +40,7 @@ export default {
 	},
 	data() {
 		return {
+			url: 'http://af6c31881353.ngrok.io/image/',
 			data: []
 		};
 	},
@@ -133,7 +134,6 @@ export default {
 	image {
 		width: 80rpx;
 		height: 80rpx;
-		border-radius: 10rpx;
 	}
 }
 </style>

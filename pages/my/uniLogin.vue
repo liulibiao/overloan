@@ -7,7 +7,6 @@ export default {
 	onShow() {
 		goLogin().then(phone => {
 			if (phone) {
-				console.log(phone, 211111112222);
 				uni.switchTab({
 					url: '/pages/home/home'
 				});

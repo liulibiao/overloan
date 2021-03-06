@@ -42,7 +42,7 @@ const getServerNo = function(wgtinfo, isPrompt = false, callback) {
 	// 可以用自己项目的请求方法
 	const { channelCode, versionCode, versionName } = wgtinfo || {};
 	uni.request({
-		url: 'http://192.168.1.38:8081/app/api/version/info',
+		url: 'http://af6c31881353.ngrok.io/app/api/version/info',
 		method: 'GET',
 		data: {
 			versionCode,
