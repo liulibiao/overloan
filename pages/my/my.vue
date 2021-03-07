@@ -56,10 +56,9 @@ export default {
 		// 登录
 		onLogin() {
 			if (!this.phoneNumber) {
-			debugger
 				// #ifdef APP-PLUS
 				login({
-					onUpdate: e => {
+					onCallLogin: e => {
 						if (e) {
 							this.onUserInit();
 						}

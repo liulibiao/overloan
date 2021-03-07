@@ -18,7 +18,6 @@
 
 <script>
 import feedBack from './feedBack.vue';
-import { goLogin } from '@/common/util.js';
 import APPUpdate, { getCurrentNo } from '@/plugins/APPUpdate/index.js';
 export default {
 	name: 'setting',

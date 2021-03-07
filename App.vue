@@ -3,7 +3,7 @@ import { mapMutations, mapActions } from 'vuex';
 import APPUpdate from '@/plugins/APPUpdate';
 export default {
 	onLaunch: function() {
-		
+		APPUpdate();
 		// #ifdef APP-PLUS
 		// 行为上报
 		if (!uni.getStorageSync('phoneNumber')) {

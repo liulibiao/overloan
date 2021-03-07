@@ -3,8 +3,10 @@ import Vue from 'vue';
 
 export default function(event) {
 	const {
-		onUpdate
+		callBack
 	} = event || {};
+	const { isLogin, appId } = Vue.prototype;
+	const apiBaseUrl = `http://f2281l7408.51vip.biz/app/api/privateagreement/privacy/${appId}/`
 	uni.preLogin({
 		provider: 'univerify',
 		success(res) {
@@ -17,7 +19,7 @@ export default function(event) {
 					//参考`univerifyStyle 数据结构`
 					backgroundColor: '#ffffff', // 授权页面背景颜色，默认值：#ffffff
 					icon: {
-						path: '/static/uni.png' // 自定义显示在授权框中的logo，仅支持本地图片 默认显示App logo
+						path: '/static/wankahua.png' // 自定义显示在授权框中的logo，仅支持本地图片 默认显示App logo
 					},
 					phoneNum: {
 						color: '#000000', // 手机号文字颜色 默认值：#000000
@@ -53,11 +55,11 @@ export default function(event) {
 						privacyItems: [
 							// 自定义协议条款，最大支持2个，需要同时设置url和title. 否则不生效
 							{
-								url: `http://`, // 点击跳转的协议详情页面
+								url: `${apiBaseUrl}0`, // 点击跳转的协议详情页面
 								title: '《用户协议》' // 协议名称
 							},
 							{
-								url: 'https://', // 点击跳转的协议详情页面
+								url: `${apiBaseUrl}1`, // 点击跳转的协议详情页面
 								title: '《隐私政策》' // 协议名称
 							}
 						]
@@ -89,7 +91,7 @@ export default function(event) {
 						if (code === 0 && data.code === 0) {
 							const phoneNumber = data.phoneNumber;
 							uni.setStorageSync('phoneNumber', phoneNumber);
-							onUpdate && onUpdate(phoneNumber);
+							callBack && callBack(phoneNumber);
 							console.log('获取电话成功', phoneNumber);
 							// 登录成功，可以关闭一键登陆授权界面了
 							uni.closeAuthView();
@@ -127,7 +129,7 @@ export default function(event) {
 							url: '/pages/my/login',
 						})
 					} else {
-						if(Vue.prototype.isLogin) {
+						if(isLogin) {
 							uni.navigateTo({
 								url: '/pages/my/login',
 							})

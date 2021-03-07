@@ -1,7 +1,7 @@
 <template>
 	<view class="main">
 		<view v-show="swiperList.length" class="banner">
-			<swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="300">
+			<swiper class="screen-swiper square-dot" circular="true" autoplay="true" interval="3000" duration="300">
 				<swiper-item v-for="(item, index) in swiperList" :key="index">
 					<view @click="onJumpH5(item)" class="item">
 						<view class="title">
@@ -11,7 +11,7 @@
 						<view class="apply-row">
 							<view class="l">
 								<view class="msg1">今日最高额度(元)</view>
-								<view class="sum">{{ item.productLimitUp }} 8000</view>
+								<view class="sum">{{ item.productLimitUp }}</view>
 							</view>
 							<view class="r"><button class="apply-bnt" type="warn">立即申请</button></view>
 						</view>
@@ -43,7 +43,7 @@ export default {
 	},
 	data() {
 		return {
-			url: 'http://af6c31881353.ngrok.io/image/',
+			url: 'http://f2281l7408.51vip.biz/image/',
 			swiperList: [],
 			noticeText: '经统计，同时申请3家以上产品，下款率高达98.6%以上',
 			indicatorDots: true,

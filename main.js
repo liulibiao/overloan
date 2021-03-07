@@ -8,7 +8,9 @@ Vue.prototype.$store = store
 Vue.prototype.$http = http;
 
 // 是否只有登录才能访问
-Vue.prototype.isLogin = false;
+Vue.prototype.isLogin = true;
+// 应用ID
+Vue.prototype.appId = '__UNI__6E8711E';
 
 App.mpType = 'app'
 

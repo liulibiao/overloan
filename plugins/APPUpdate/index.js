@@ -4,7 +4,7 @@
 // 请求配置说明：https://ext.dcloud.net.cn/plugin?id=822
 // import $http from '@/common/requestConfig.js';
 /**** 结束 *****/
-
+import Vue from 'vue';
 const platform = uni.getSystemInfoSync().platform;
 // 主颜色
 const $mainColor = "FF5B78";
@@ -15,10 +15,15 @@ const $iconUrl = "/static/icon/ic_ar.png";
 export const getCurrentNo = function(callback) {
 	// 获取本地应用资源版本号
 	plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+		// callback({
+		// 	versionCode: '1.0.0',
+		// 	versionName: 100,
+		// 	channelCode: '__UNI__6E8711E'
+		// });
 		callback && callback({
 			versionCode: inf.versionCode,
 			versionName: inf.version,
-			channelCode: inf.appid
+			channelCode: Vue.prototype.appId
 		});
 	});
 }
@@ -42,7 +47,7 @@ const getServerNo = function(wgtinfo, isPrompt = false, callback) {
 	// 可以用自己项目的请求方法
 	const { channelCode, versionCode, versionName } = wgtinfo || {};
 	uni.request({
-		url: 'http://af6c31881353.ngrok.io/app/api/version/info',
+		url: 'http://f2281l7408.51vip.biz/app/api/version/info',
 		method: 'GET',
 		data: {
 			versionCode,
@@ -60,6 +65,7 @@ const getServerNo = function(wgtinfo, isPrompt = false, callback) {
 			 * | downloadUrl	 | y	    | String	| 版本下载链接（IOS安装包更新请放跳转store应用商店链接,安卓apk和wgt文件放文件下载链接）  |
 			 */
 			const { code, data } = res.data || {};
+			console.log(res, 'version11');
 			if (code === 0 && data) {
 				if (data.downloadUrl) {
 					callback && callback(data);
@@ -83,7 +89,7 @@ const getServerNo = function(wgtinfo, isPrompt = false, callback) {
 const getDownload = function(data) {
 	let popupData = {
 		progress: true,
-		buttonNum: 2
+		buttonNum: 0
 	};
 	if(data.forceUpdate){
 		popupData.buttonNum = 0;

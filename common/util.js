@@ -1,10 +1,10 @@
 import login from '@/common/login.js';
-function goLogin(onUpdate = null) {
+function goLogin(callBack = null) {
 	return new Promise((resolve, reject) => {
 		const phone = uni.getStorageSync('phoneNumber');
 		if (!phone) {
 			// #ifdef APP-PLUS
-			login({onUpdate});
+			login({callBack});
 			// #endif
 
 			/* H5 兼容 pc 所需 */

@@ -40,7 +40,7 @@ export default {
 	},
 	data() {
 		return {
-			url: 'http://af6c31881353.ngrok.io/image/',
+			url: 'http://f2281l7408.51vip.biz/image/',
 			data: []
 		};
 	},

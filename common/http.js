@@ -1,32 +1,37 @@
 import { getCurrentNo } from '@/plugins/APPUpdate/index.js';
-const apiBaseUrl = 'http://af6c31881353.ngrok.io/app/'
+const apiBaseUrl = 'http://f2281l7408.51vip.biz/app/'
 import Vue from 'vue';
 
 // 不需要登录的接口
 const noToken = [
-	'behaviour/collect/app'
+	'behaviour/collect/app',
+	'privateagreement/info',
+	'privateagreement/privacy'
 ];
 
 export default function({url, method, data, callback, hideLoading}) {
+	const telephone = uni.getStorageSync('phoneNumber');
+	const { appId, isLogin } = Vue.prototype;
 	// 请求头信息
 	const headers = {
-		// 'appId': '__UNI__6E8711E',
-		'telephone': uni.getStorageSync('phoneNumber'),
+		'appId': appId,
+		'telephone': telephone,
 		// 'telephone': 15000381110,
-		// 'deviceId': '212312414322321',
+		// 'deviceId': '123456789',
 	};
 	// #ifdef APP-PLUS
-	getCurrentNo(res => {
-		const { channelCode} = res || {};
-		headers['appId'] = channelCode;
-	});
+	// getCurrentNo(res => {
+	// 	const { channelCode} = res || {};
+	// 	headers['appId'] = channelCode;
+	// });
 	headers['deviceId'] = plus.device.uuid;
 	// #endif
 	
 	// 判断是否需要登录
-	if (!(noToken.indexOf(url) >= 0)) {
+	if (noToken.every(item => url.indexOf(item) === -1)) {
 		// 获取用户电话
-		if (Vue.prototype.isLogin && !telephone) {
+		if (isLogin && !telephone) {
+			debugger
 			uni.navigateTo({
 				url: '/pages/my/uniLogin'
 			})
