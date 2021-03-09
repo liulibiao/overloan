@@ -5,6 +5,7 @@ import Vue from 'vue';
 // 不需要登录的接口
 const noToken = [
 	'behaviour/collect/app',
+	'api/version/info',
 	'privateagreement/info',
 	'privateagreement/privacy'
 ];

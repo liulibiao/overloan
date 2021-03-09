@@ -46,6 +46,7 @@ const getServerNo = function(wgtinfo, isPrompt = false, callback) {
 	/****************以下是示例*******************/
 	// 可以用自己项目的请求方法
 	const { channelCode, versionCode, versionName } = wgtinfo || {};
+	console.log(wgtinfo, 'wgtinfo');
 	uni.request({
 		url: 'http://f2281l7408.51vip.biz/app/api/version/info',
 		method: 'GET',
@@ -65,7 +66,7 @@ const getServerNo = function(wgtinfo, isPrompt = false, callback) {
 			 * | downloadUrl	 | y	    | String	| 版本下载链接（IOS安装包更新请放跳转store应用商店链接,安卓apk和wgt文件放文件下载链接）  |
 			 */
 			const { code, data } = res.data || {};
-			console.log(res, 'version11');
+			console.log(res, 'version');
 			if (code === 0 && data) {
 				if (data.downloadUrl) {
 					callback && callback(data);
