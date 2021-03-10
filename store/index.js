@@ -44,11 +44,11 @@ const store = new Vuex.Store({
 				http({
 					url: 'api/productconfig/list',
 					method: 'get',
-					data,
 					callback: (ret) => {
 						commit('setProduct', ret)
 						resolve(ret);
-					}
+					},
+					data
 				})
 			});
 		},

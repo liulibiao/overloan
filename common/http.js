@@ -32,7 +32,6 @@ export default function({url, method, data, callback, hideLoading}) {
 	if (noToken.every(item => url.indexOf(item) === -1)) {
 		// 获取用户电话
 		if (isLogin && !telephone) {
-			debugger
 			uni.navigateTo({
 				url: '/pages/my/uniLogin'
 			})
@@ -45,14 +44,13 @@ export default function({url, method, data, callback, hideLoading}) {
 			title: '加载中'
 		});
 	}
-	console.log(headers, 'headers');
+
 	uni.request({
 		url: apiBaseUrl + url,
 		data,
 		header: headers,
 		method,
 		success: (response) => {
-			console.log(response, 'response');
 			if (!hideLoading) {
 				uni.hideLoading();
 			}

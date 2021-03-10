@@ -67,12 +67,12 @@ const getServerNo = function(wgtinfo, isPrompt = false, callback) {
 			 */
 			const { code, data } = res.data || {};
 			console.log(res, 'version');
-			if (code === 0 && data) {
-				if (data.downloadUrl) {
+			if (code === 0) {
+				if (data && data.downloadUrl) {
 					callback && callback(data);
 				} else if (isPrompt) {
 					uni.showToast({
-						title: "暂无新版本",
+						title: "已经是最新版本",
 						icon: "none"
 					});
 				}
