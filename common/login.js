@@ -8,7 +8,7 @@ export default function(event) {
 	const { isLogin, appId } = Vue.prototype;
 	const { vendor, uuid } = plus.device;
 	const code =  vendor && vendor.toLowerCase();
-	const apiBaseUrl = `www.xinjianboke.com/app/api/privateagreement/privacy/${appId}/${code}/`
+	const apiBaseUrl = `http://www.xinjianboke.com/app/api/privateagreement/privacy/${appId}/${code}/`
 	uni.preLogin({
 		provider: 'univerify',
 		success(res) {
