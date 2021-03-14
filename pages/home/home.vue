@@ -6,7 +6,10 @@
 					<view @click="onJumpH5(item)" class="item">
 						<view class="title">
 							<view class="logo"><image :src="url+item.productLogo"></image></view>
-							<text class="text">{{ item.productName }}</text>
+							<view class="product">
+								<text class="text productName">{{ item.productName }}</text>
+								<text class="productRate">{{ item.productRate }}</text>
+							</view>
 						</view>
 						<view class="apply-row">
 							<view class="l">

@@ -24,7 +24,18 @@
 				display: flex;
 				font-weight: 800;
 				margin-bottom: 10rpx;
+				.product {
+					width: 100%;
+					display: flex;
+					.productName {
+						flex: 1;
+					}
+					.productRate {
+						
+					}
+				}
 				.logo {
+					width: 80rpx;
 					image {
 						width: 80rpx;
 						height: 80rpx;

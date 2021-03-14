@@ -5,7 +5,8 @@
 				<view class="left">
 					<view class="pictrue"><image :src="url + item.productLogo" mode=""></image></view>
 					<view class="to-text">
-						<view class="t1">{{ item.productName }}</view>
+						<view class="productName">{{ item.productName }}</view>
+						<view class="productRate">{{ item.productRate }}</view>
 						<view class="t2 color-85">{{ item.fastTagShow ? item.productTag : '' }}</view>
 					</view>
 				</view>
@@ -94,10 +95,19 @@ export default {
 				line-height: 48rpx;
 				margin-left: 10rpx;
 				display: inline-block;
-				.t1 {
+				width: inherit;
+				.productName {
 					color: #000000;
 					font-size: 34rpx;
 					font-weight: 500;
+					display: inline-block;
+					width: 50%;
+				}
+				.productRate {
+					display: inline-block;
+					width: 50%;
+					color: #858585;
+					text-align: center;
 				}
 			}
 		}
@@ -136,6 +146,7 @@ export default {
 }
 .pictrue {
 	display: inline-block;
+	width: 80rpx;
 	image {
 		width: 80rpx;
 		height: 80rpx;
