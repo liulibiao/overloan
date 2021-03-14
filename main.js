@@ -10,7 +10,7 @@ Vue.prototype.$http = http;
 // 是否只有登录才能访问
 Vue.prototype.isLogin = true;
 // 应用ID
-Vue.prototype.appId = '__UNI__6E871SB';
+Vue.prototype.appId = '__UNI__6E8711E';
 // 短信模版
 Vue.prototype.msgTemplateId = '11467';
 

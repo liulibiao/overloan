@@ -1,5 +1,5 @@
 import { getCurrentNo } from '@/plugins/APPUpdate/index.js';
-const apiBaseUrl = 'http://192.168.1.30:8088/app/'
+const apiBaseUrl = 'http://www.xinjianboke.com/app/'
 import Vue from 'vue';
 
 // 不需要登录的接口
@@ -21,7 +21,7 @@ export default function({url, method, data, callback, hideLoading}) {
 	// #ifdef APP-PLUS
 	const { vendor, uuid } = plus.device;
 	headers['deviceId'] = uuid;
-	headers['channelCode'] = vendor;
+	headers['channelCode'] = vendor && vendor.toLowerCase();
 	// #endif
 	
 	// 判断是否需要登录
@@ -40,7 +40,6 @@ export default function({url, method, data, callback, hideLoading}) {
 			title: '加载中'
 		});
 	}
-
 	uni.request({
 		url: apiBaseUrl + url,
 		data,

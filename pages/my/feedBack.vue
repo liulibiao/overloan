@@ -8,6 +8,7 @@
 <script>
 	import uniPopup from '@/components/uni-popup/uni-popup.vue';
 	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue';
+
 	export default {
 		name: 'feedBack',
 		components: {
@@ -22,14 +23,14 @@
 				uni.showLoading({
 					title: '加载中'
 				})
-				uni.request({
-					url: 'http://f2281l7408.51vip.biz/api/feedback/save',
+				this.$http({
+					url: 'api/feedback/save',
 					method: 'post',
 					data: {
 						mobile: uni.getStorageSync('phoneNumber'),
 						feedbackInfo: value
 					},
-					success: (ret) => {
+					callback: (ret) => {
 						uni.hideLoading();
 						uni.showToast({
 							title: '感谢您的反馈',
@@ -37,13 +38,6 @@
 							icon: 'none'
 						})
 						dome();
-					},
-					fail: () => {
-						uni.showToast({
-							title: '操作失败',
-							duration: 1500,
-							icon: 'none'
-						})
 					}
 				})
 			}

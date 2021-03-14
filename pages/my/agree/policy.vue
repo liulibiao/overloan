@@ -16,7 +16,7 @@
 				url: 'api/privateagreement/info/1',
 				method: 'get',
 				callback: ret => {
-					this.strings = ret.data && ret.data.agreementInfo;
+					this.strings = ret.data ? ret.data.agreementInfo : '';
 				}
 			})
 		}

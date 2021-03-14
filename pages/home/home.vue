@@ -43,7 +43,7 @@ export default {
 	},
 	data() {
 		return {
-			url: 'http://f2281l7408.51vip.biz/image/',
+			url: 'http://www.xinjianboke.com/image/',
 			swiperList: [],
 			noticeText: '经统计，同时申请3家以上产品，下款率高达98.6%以上',
 			indicatorDots: true,

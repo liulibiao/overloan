@@ -40,7 +40,7 @@ export default {
 	},
 	data() {
 		return {
-			url: 'http://f2281l7408.51vip.biz/image/',
+			url: 'http://www.xinjianboke.com/image/',
 			data: []
 		};
 	},
