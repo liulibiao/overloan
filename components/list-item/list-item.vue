@@ -3,23 +3,23 @@
 		<view @click="onJumpH5(item)" class="list-item" v-for="item in $store.state.productData" :key="item.id">
 			<view class="top-content">
 				<view class="left">
-					<view class="pictrue"><image :src="url+item.productLogo" mode=""></image></view>
+					<view class="pictrue"><image :src="url + item.productLogo" mode=""></image></view>
 					<view class="to-text">
 						<view class="t1">{{ item.productName }}</view>
 						<view class="t2 color-85">{{ item.fastTagShow ? item.productTag : '' }}</view>
 					</view>
 				</view>
-				<view class="right"><button type="primary" size="mini">立即领钱</button></view>
+				<view class="right"><button class="product-btn" type="primary" size="mini">立即领钱</button></view>
 			</view>
 			<view class="align-content fix">
-				<view class="fix-3 color-red">{{ item.limitTagShow ? item.productLimitLow +'-'+ item.productLimitUp : '' }}</view>
-				<view  class="fix-3 uni-center">{{ item.passTagShow ? item.loanNum : '' }}</view>
+				<view class="fix-3 color-red">{{ item.limitTagShow ? item.productLimitLow + '-' + item.productLimitUp : '' }}</view>
+				<view class="fix-3 text-center">{{ item.passTagShow ? item.loanNum : '' }}</view>
 				<view class="fix-3 f-r color-red">{{ item.productFast }}</view>
 			</view>
 			<view class="fix">
-				<view class="fix-3 color-85">{{item.limitTagShow ? '额度范围(元)' : ''}}</view>
-				<view class="fix-3 uni-center color-85">{{ item.passTagShow ? '成功下款' : ''}}</view>
-				<view class="fix-3 f-r color-85">期限</view>
+				<view class="fix-3 color-85">{{ item.attribute4 ? item.attribute1 : '' }}</view>
+				<view class="fix-3 text-center color-85">{{ item.attribute5 ? item.attribute2 : '' }}</view>
+				<view class="fix-3 f-r color-85">{{item.attribute6 ? item.attribute3 : ''}}</view>
 			</view>
 		</view>
 	</view>
@@ -27,7 +27,7 @@
 
 <script>
 import { goLogin } from '@/common/util.js';
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
 export default {
 	name: 'list-item',
 	props: {
@@ -55,7 +55,7 @@ export default {
 					const { productUrl, productName, id } = item || {};
 					uni.navigateTo({
 						url: `/components/view/view?title=${productName}&url=${productUrl}&id=${id}`
-					})
+					});
 				}
 			});
 		}
@@ -64,6 +64,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// .product-btn {
+// 	background-c: #007aff;
+// }
 .list-item {
 	padding: 20rpx;
 	margin-bottom: 12rpx;
@@ -113,6 +116,9 @@ export default {
 			text-align: right;
 		}
 	}
+	.text-center {
+		text-align: center;
+	}
 	.align-content {
 		font-weight: 800;
 		padding: 20rpx 0;
@@ -127,7 +133,6 @@ export default {
 	uni-button {
 		background-color: #f55240;
 	}
-	
 }
 .pictrue {
 	display: inline-block;

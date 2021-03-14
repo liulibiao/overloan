@@ -29,7 +29,7 @@ export default {
 		};
 	},
 	onNavigationBarButtonTap() {
-		if (this.phoneNumber) {
+		if (uni.getStorageSync('phoneNumber')) {
 			uni.navigateTo({
 				url: '/pages/my/setting'
 			});

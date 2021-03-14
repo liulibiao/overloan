@@ -1,5 +1,5 @@
 import { getCurrentNo } from '@/plugins/APPUpdate/index.js';
-const apiBaseUrl = 'http://f2281l7408.51vip.biz/app/'
+const apiBaseUrl = 'http://192.168.1.30:8088/app/'
 import Vue from 'vue';
 
 // 不需要登录的接口
@@ -16,16 +16,12 @@ export default function({url, method, data, callback, hideLoading}) {
 	// 请求头信息
 	const headers = {
 		'appId': appId,
-		'telephone': telephone,
-		// 'telephone': 15000381110,
-		// 'deviceId': '123456789',
+		'telephone': telephone
 	};
 	// #ifdef APP-PLUS
-	// getCurrentNo(res => {
-	// 	const { channelCode} = res || {};
-	// 	headers['appId'] = channelCode;
-	// });
-	headers['deviceId'] = plus.device.uuid;
+	const { vendor, uuid } = plus.device;
+	headers['deviceId'] = uuid;
+	headers['channelCode'] = vendor;
 	// #endif
 	
 	// 判断是否需要登录

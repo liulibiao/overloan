@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="agree">
 		<rich-text :nodes="strings"></rich-text>
 	</view>
 </template>
@@ -23,5 +23,6 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
+	@import "style.scss";
 </style>

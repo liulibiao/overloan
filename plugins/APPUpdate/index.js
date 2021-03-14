@@ -5,6 +5,7 @@
 // import $http from '@/common/requestConfig.js';
 /**** 结束 *****/
 import Vue from 'vue';
+import http from '../../common/http.js';
 const platform = uni.getSystemInfoSync().platform;
 // 主颜色
 const $mainColor = "FF5B78";
@@ -23,7 +24,7 @@ export const getCurrentNo = function(callback) {
 		callback && callback({
 			versionCode: inf.versionCode,
 			versionName: inf.version,
-			channelCode: Vue.prototype.appId
+			appId: Vue.prototype.appId
 		});
 	});
 }
@@ -45,17 +46,17 @@ const getServerNo = function(wgtinfo, isPrompt = false, callback) {
 	 */
 	/****************以下是示例*******************/
 	// 可以用自己项目的请求方法
-	const { channelCode, versionCode, versionName } = wgtinfo || {};
+	const { appId, versionCode, versionName } = wgtinfo || {};
 	console.log(wgtinfo, 'wgtinfo');
-	uni.request({
-		url: 'http://f2281l7408.51vip.biz/app/api/version/info',
+	http({
+		url: 'api/version/info',
 		method: 'GET',
 		data: {
 			versionCode,
 			versionName,
-			channelCode
+			appId
 		},
-		success: (res) => {
+		callback: (res) => {
 			/* res的数据说明
 			 * | 参数名称	     | 一定返回 	| 类型	    | 描述
 			 * | -------------|--------- | --------- | ------------- |
@@ -65,8 +66,7 @@ const getServerNo = function(wgtinfo, isPrompt = false, callback) {
 			 * | forceUpdate	 | y	    | boolean	| 是否强制更新  |
 			 * | downloadUrl	 | y	    | String	| 版本下载链接（IOS安装包更新请放跳转store应用商店链接,安卓apk和wgt文件放文件下载链接）  |
 			 */
-			const { code, data } = res.data || {};
-			console.log(res, 'version');
+			const { code, data } = res || {};
 			if (code === 0) {
 				if (data && data.downloadUrl) {
 					callback && callback(data);

@@ -6,7 +6,7 @@ export default function(event) {
 		callBack
 	} = event || {};
 	const { isLogin, appId } = Vue.prototype;
-	const apiBaseUrl = `http://f2281l7408.51vip.biz/app/api/privateagreement/privacy/${appId}/`
+	const apiBaseUrl = `http://192.168.1.30:8088/app/api/privateagreement/privacy/${appId}/`
 	uni.preLogin({
 		provider: 'univerify',
 		success(res) {
