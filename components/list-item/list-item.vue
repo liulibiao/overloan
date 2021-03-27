@@ -6,7 +6,7 @@
 					<view class="pictrue"><image :src="url + item.productLogo" mode=""></image></view>
 					<view class="to-text">
 						<view class="productName">{{ item.productName }}</view>
-						<view class="productRate">{{ item.productRate }}</view>
+						<view class="productRate">{{ item.rateTagShow ? item.productRate : '' }}</view>
 						<view class="t2 color-85">{{ item.fastTagShow ? item.productTag : '' }}</view>
 					</view>
 				</view>

@@ -5,10 +5,8 @@ export default function(event) {
 	const {
 		callBack
 	} = event || {};
-	const { isLogin, appId } = Vue.prototype;
-	const { vendor, uuid } = plus.device;
-	const code =  vendor && vendor.toLowerCase();
-	const apiBaseUrl = `http://www.xinjianboke.com/app/api/privateagreement/privacy/${appId}/${code}/`
+	const { isLogin, appId, channelCode } = Vue.prototype;
+	const apiBaseUrl = `http://www.xinjianboke.com/app/api/privateagreement/privacy/${appId}/${channelCode}/`
 	uni.preLogin({
 		provider: 'univerify',
 		success(res) {

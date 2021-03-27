@@ -10,7 +10,9 @@ Vue.prototype.$http = http;
 // 是否只有登录才能访问
 Vue.prototype.isLogin = true;
 // 应用ID
-Vue.prototype.appId = '__UNI__6E8711E';
+Vue.prototype.appId = '__UNI__EBA6594';
+// 渠道
+Vue.prototype.channelCode = 'vivo';
 // 短信模版
 Vue.prototype.msgTemplateId = '11467';
 

@@ -56,15 +56,7 @@ export default {
 		};
 	},
 	created() {
-		this.$http({
-			url: 'api/bannerconfig/list',
-			method: 'get',
-			callback:(ret) => {
-				if (ret.code === 0) {
-					this.swiperList = ret.data || [];
-				}
-			}
-		})
+		this.getBanner();
 	},
 	methods: {
 		...mapActions(['productconfig']),
@@ -77,9 +69,21 @@ export default {
 					})
 				}
 			});
+		},
+		getBanner() {
+			this.$http({
+				url: 'api/bannerconfig/list',
+				method: 'get',
+				callback:(ret) => {
+					if (ret.code === 0) {
+						this.swiperList = ret.data || [];
+					}
+				}
+			})
 		}
 	},
 	async onPullDownRefresh() {
+		this.getBanner();
 		await this.productconfig();
 		uni.stopPullDownRefresh();
 	}

@@ -12,16 +12,16 @@ const noToken = [
 
 export default function({url, method, data, callback, hideLoading}) {
 	const telephone = uni.getStorageSync('phoneNumber');
-	const { appId, isLogin } = Vue.prototype;
+	const { appId, isLogin, channelCode } = Vue.prototype;
 	// 请求头信息
 	const headers = {
 		'appId': appId,
-		'telephone': telephone
+		'telephone': telephone,
+		'channelCode': channelCode
 	};
 	// #ifdef APP-PLUS
-	const { vendor, uuid } = plus.device;
+	const { uuid } = plus.device;
 	headers['deviceId'] = uuid;
-	headers['channelCode'] = vendor && vendor.toLowerCase();
 	// #endif
 	
 	// 判断是否需要登录
