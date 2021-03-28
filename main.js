@@ -7,13 +7,9 @@ Vue.config.productionTip = false
 Vue.prototype.$store = store
 Vue.prototype.$http = http;
 
-// 是否只有登录才能访问
 Vue.prototype.isLogin = true;
-// 应用ID
-Vue.prototype.appId = '__UNI__EBA6594';
-// 渠道
+Vue.prototype.appId = '__UNI__033F429';
 Vue.prototype.channelCode = 'vivo';
-// 短信模版
 Vue.prototype.msgTemplateId = '11467';
 
 App.mpType = 'app'

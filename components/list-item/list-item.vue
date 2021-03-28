@@ -20,7 +20,7 @@
 			<view class="fix">
 				<view class="fix-3 color-85">{{ item.attribute4 ? item.attribute1 : '' }}</view>
 				<view class="fix-3 text-center color-85">{{ item.attribute5 ? item.attribute2 : '' }}</view>
-				<view class="fix-3 f-r color-85">{{item.attribute6 ? item.attribute3 : ''}}</view>
+				<view class="fix-3 f-r color-85">{{ item.attribute6 ? item.attribute3 : '' }}</view>
 			</view>
 		</view>
 	</view>
@@ -92,7 +92,7 @@ export default {
 				}
 			}
 			.to-text {
-				line-height: 48rpx;
+				line-height: 36rpx;
 				margin-left: 10rpx;
 				display: inline-block;
 				width: inherit;
@@ -102,12 +102,18 @@ export default {
 					font-weight: 500;
 					display: inline-block;
 					width: 50%;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
 				}
 				.productRate {
 					display: inline-block;
 					width: 50%;
 					color: #858585;
 					text-align: center;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
 				}
 			}
 		}
@@ -136,6 +142,9 @@ export default {
 	}
 	.color-85 {
 		color: #858585;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 	.color-red {
 		color: #f55240;

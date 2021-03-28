@@ -8,12 +8,12 @@
 							<view class="logo"><image :src="url+item.productLogo"></image></view>
 							<view class="product">
 								<text class="text productName">{{ item.productName }}</text>
-								<text class="productRate">{{ item.productRate }}</text>
+								<text class="productRate">{{ item.rateTagShow ? item.productRate : '' }}</text>
 							</view>
 						</view>
 						<view class="apply-row">
 							<view class="l">
-								<view class="msg1">今日最高额度(元)</view>
+								<view class="msg1">{{item.deadlineTagShow ? item.productType : ''}}</view>
 								<view class="sum">{{ item.productLimitUp }}</view>
 							</view>
 							<view class="r"><button class="apply-bnt" type="warn">立即申请</button></view>

@@ -37,13 +37,13 @@
 		"sms": {
 			"name": "overLoan",
 			"codeExpiresIn": 300,
-			"smsKey": "2f4fb68bdf838c7997aa2bb6651cb68c",
-			"smsSecret": "4345998837de7c7f879b262d2a84375d"
+			"smsKey": "fd576fa3826076d50e900a529b6ddadf",
+			"smsSecret": "4d30cf4a5c922853633605a2d44bf263"
 		},
 		"univerify": {
-			"appid": "__UNI__6E8711E",
-			"apiKey": "98cec899f339a9f57acecc8e7492eeb1",
-			"apiSecret": "e0db749e0cc8185fa51a7a7fee8f9055"
+			"appid": "__UNI__033F429",
+			"apiKey": "f649aba72427aecb7bada4e9eb1734c8",
+			"apiSecret": "6eacaa247639123f3f6db429623223fb"
 		}
 	}
 }
