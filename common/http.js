@@ -16,7 +16,7 @@ export default function({url, method, data, callback, hideLoading}) {
 	// 请求头信息
 	const headers = {
 		'appId': appId,
-		'telephone': 15000381110,
+		'telephone': telephone,
 		'channelCode': channelCode
 	};
 	// #ifdef APP-PLUS
