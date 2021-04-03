@@ -5,12 +5,14 @@
 				<view class="left">
 					<view class="pictrue"><image :src="url + item.productLogo" mode=""></image></view>
 					<view class="to-text">
-						<view class="productName">{{ item.productName }}</view>
-						<view class="productRate">{{ item.rateTagShow ? item.productRate : '' }}</view>
-						<view class="t2 color-85">{{ item.fastTagShow ? item.productTag : '' }}</view>
+						<view>
+							<view class="productName">{{ item.productName }}</view>
+							<view class="productRate">{{ item.rateTagShow ? item.productRate : '' }}</view>
+						</view>
+						<view class="color-85">{{ item.fastTagShow ? item.productTag : '' }}</view>
 					</view>
 				</view>
-				<view class="right"><button class="product-btn" type="primary" size="mini">立即领钱</button></view>
+				<view><button class="product-btn" type="primary" size="mini">立即领钱</button></view>
 			</view>
 			<view class="align-content fix">
 				<view class="fix-3 color-red">{{ item.limitTagShow ? item.productLimitLow + '-' + item.productLimitUp : '' }}</view>
@@ -75,13 +77,14 @@ export default {
 	border-radius: 10rpx;
 	.top-content {
 		overflow: hidden;
-		height: 80rpx;
+		padding: 10rpx 0;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		width: 100%;
 		.left {
-			float: left;
-			width: 70%;
+			display: flex;
+			flex: 1;
 			.logo {
 				display: inline-block;
 				width: 80rpx;
@@ -93,9 +96,7 @@ export default {
 			}
 			.to-text {
 				line-height: 36rpx;
-				margin-left: 10rpx;
-				display: inline-block;
-				width: inherit;
+				width: calc(100% - 50px);
 				.productName {
 					color: #000000;
 					font-size: 34rpx;
@@ -117,11 +118,6 @@ export default {
 				}
 			}
 		}
-		.right {
-			float: right;
-			width: 30%;
-			text-align: right;
-		}
 	}
 	.fix {
 		display: flex;
@@ -137,7 +133,7 @@ export default {
 	}
 	.align-content {
 		font-weight: 800;
-		padding: 20rpx 0;
+		padding: 10rpx 0;
 		font-size: 30rpx;
 	}
 	.color-85 {
@@ -154,8 +150,9 @@ export default {
 	}
 }
 .pictrue {
-	display: inline-block;
+	flex: 1;
 	width: 80rpx;
+	height: 80rpx;
 	image {
 		width: 80rpx;
 		height: 80rpx;

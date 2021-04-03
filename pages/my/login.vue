@@ -36,7 +36,7 @@
 
 <script>
 import inputBox from '@/components/input-box/input-box';
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
 
 export default {
 	name: 'login',
@@ -47,7 +47,14 @@ export default {
 			checked: false,
 			mobile: '',
 			code: '',
-			rightText: '发送验证码'
+			rightText: '发送验证码',
+			test: [{
+				phone: '19173311946',
+				code: '6666'
+			}, {
+				phone: '17870466985',
+				code: '9999'
+			}]
 		};
 	},
 
@@ -73,9 +80,8 @@ export default {
 			if (this.checked) {
 				try {
 					const { mobile, code } = this;
-					const initMobile = '19173311946';
-					const initCode = '6666';
-					if (mobile === initMobile && code === initCode) {
+					// 测试账号
+					if (this.test.some(item => item.phone == mobile && item.code === code)) {
 						uni.setStorageSync('phoneNumber', mobile);
 						uni.switchTab({
 							url: '/pages/home/home'
@@ -152,7 +158,8 @@ export default {
 				const randomStr = '000' + Math.floor(Math.random() * 1000000);
 				const code = randomStr.substring(randomStr.length - 4);
 				try {
-					uniCloud.callFunction({
+					uniCloud
+						.callFunction({
 							name: 'sendcode',
 							data: {
 								mobile,
