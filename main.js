@@ -10,7 +10,7 @@ Vue.prototype.$http = http;
 Vue.prototype.isLogin = true;
 Vue.prototype.appId = '__UNI__033F429';
 Vue.prototype.channelCode = 'vivo';
-Vue.prototype.msgTemplateId = '11467';
+Vue.prototype.msgTemplateId = '11650';
 
 App.mpType = 'app'
 

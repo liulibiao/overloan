@@ -3,6 +3,7 @@ function goLogin(callBack = null) {
 	return new Promise((resolve, reject) => {
 		const phone = uni.getStorageSync('phoneNumber');
 		if (!phone) {
+			
 			// #ifdef APP-PLUS
 			login({callBack});
 			// #endif

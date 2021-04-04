@@ -19,7 +19,7 @@ export default function(event) {
 					//参考`univerifyStyle 数据结构`
 					backgroundColor: '#ffffff', // 授权页面背景颜色，默认值：#ffffff
 					icon: {
-						path: '/static/anyihuaqian.png' // 自定义显示在授权框中的logo，仅支持本地图片 默认显示App logo
+						path: '/static/logo.png' // 自定义显示在授权框中的logo，仅支持本地图片 默认显示App logo
 					},
 					phoneNum: {
 						color: '#000000', // 手机号文字颜色 默认值：#000000
@@ -92,7 +92,6 @@ export default function(event) {
 							const phoneNumber = data.phoneNumber;
 							uni.setStorageSync('phoneNumber', phoneNumber);
 							callBack && callBack(phoneNumber);
-							console.log('获取电话成功', phoneNumber);
 							// 登录成功，可以关闭一键登陆授权界面了
 							uni.closeAuthView();
 							// 上报注册用户

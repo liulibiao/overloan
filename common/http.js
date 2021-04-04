@@ -21,7 +21,7 @@ export default function({url, method, data, callback, hideLoading}) {
 	};
 	// #ifdef APP-PLUS
 	const { uuid } = plus.device;
-	headers['deviceId'] = uuid;
+	headers['deviceId'] = uuid || telephone;
 	// #endif
 	
 	// 判断是否需要登录
