@@ -4,7 +4,7 @@
 			<view class="center-list-item" v-for="(item, index) in lineItem" :class="{ 'border-bottom': lineItem.length > index + 1 }" :key="item.icon" @click="onClickLine(item.type)">
 				<!-- <uni-icons color="#f55652" style="margin-right: 15upx" class="list-icon" :type="item.icon" size="15"></uni-icons> -->
 				<text class="list-text">{{ item.name }}</text>
-				<text v-if="item.type === 'qq'" class="line">2892848887</text>
+				<text v-if="item.type === 'qq'" class="line">2981439371</text>
 				<text v-if="item.type === 'versions'" class="line">{{versionName}}</text>
 				<uni-icons color="#555" class="list-icon" type="arrowright" size="15"></uni-icons>
 			</view>

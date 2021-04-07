@@ -1,11 +1,9 @@
 <template>
-	<view>
-		<web-view :webview-styles="webviewStyles" :src="url"></web-view>
-	</view>
+	<view><web-view :webview-styles="webviewStyles" :src="url"></web-view></view>
 </template>
 <script>
 import navBar from '@/components/uni-nav-bar/uni-nav-bar.vue';
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
 
 export default {
 	components: { navBar },
@@ -17,12 +15,34 @@ export default {
 					color: '#f64640'
 				}
 			},
-			url: ''
+			url: '',
+			testData: [
+				{
+					href: 'http://www.jiujiangyuechen.top/zyxf/',
+					mobile: '15910459177'
+				},
+				{
+					href: 'http://loan.bbeb.online/haier/',
+					mobile: '17870466985'
+				},
+				{
+					href: 'http://www.youcaikeji.cn/yhcold3/home.html',
+					mobile: '15910459177'
+				}
+			]
 		};
 	},
+
 	onLoad: function(optioin) {
 		const { title, url, id } = optioin;
-		this.url = url;
+		const phoneNumber = uni.getStorageSync('phoneNumber');
+		const test = this.testData.filter(item => item.href == url)[0] || {};
+		if (test && test.mobile == phoneNumber) {
+			const { href, mobile } = test;
+			this.url = `${href}?phone=${mobile}`;
+		} else {
+			this.url = url;
+		}
 		uni.setNavigationBarTitle({
 			title
 		});
@@ -32,7 +52,7 @@ export default {
 		});
 	},
 	methods: {
-		...mapActions(['behaviour']),
+		...mapActions(['behaviour'])
 	}
 };
 </script>

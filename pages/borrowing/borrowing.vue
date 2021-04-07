@@ -43,7 +43,6 @@ export default {
 .bar-top {
 	position: fixed;
 	width: 100%;
-	height: 280rpx;
 	z-index: 2;
 }
 .uni-noticebar {
